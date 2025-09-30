@@ -112,7 +112,7 @@ export default function Home() {
             <div className="text-2xl font-bold tracking-tight"><a href="#">EHS Friends</a></div>
             <ul className="hidden md:flex items-center space-x-8">
               <li><a href="#" className={`transition-colors ${scrolled ? 'hover:text-blue-600' : 'hover:text-blue-200'}`}>회사소개</a></li>
-              <li><a href="#" className={`transition-colors ${scrolled ? 'hover:text-blue-600' : 'hover:text-blue-200'}`}>EHS 컨설팅</a></li>
+              <li><a href="/consulting/musculoskeletal-survey" className={`transition-colors ${scrolled ? 'hover:text-blue-600' : 'hover:text-blue-200'}`}>EHS 컨설팅</a></li>
               <li><a href="#" className={`transition-colors ${scrolled ? 'hover:text-blue-600' : 'hover:text-blue-200'}`}>실적</a></li>
               <li><a href="#" className={`transition-colors ${scrolled ? 'hover:text-blue-600' : 'hover:text-blue-200'}`}>전문가 네트워크</a></li>
             </ul>
