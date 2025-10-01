@@ -1,7 +1,6 @@
 // EnvironmentalImpactPage.js
 
 import SideNavigation from '@/app/components/SideNavigation';
-import Link from 'next/link';
 
 export default function EnvironmentalImpactPage() {
     const navItems = [

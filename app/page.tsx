@@ -4,7 +4,6 @@ import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Youtube, Linkedin, Instagram, ArrowRight } from 'lucide-react';
-
 const slideData = [
   { id: 0, title: "새롭게 달라진\nEHS Friends", subtitle: "전문적인 환경, 안전, 보건 컨설팅으로\n귀사의 경쟁력을 높여보세요.", imagePlaceholder: "메인 비주얼 영역 1" },
   { id: 1, title: "화학물질관리\n전문 컨설팅", subtitle: "복잡한 화학물질 규제, EHS Friends가\n명확한 해결책을 제시합니다.", imagePlaceholder: "메인 비주얼 영역 2" },
@@ -49,7 +48,6 @@ const partnerLogos = [
   { name: 'Netflix', logoSrc: 'https://logo.clearbit.com/netflix.com' },
   { name: 'Discord', logoSrc: 'https://logo.clearbit.com/discord.com' },
 ];
-
 const footerLinks = {
   '회사소개': ['인사말', '기업개요', '직원 및 연락처'],
   'EHS 컨설팅': [
@@ -91,7 +89,7 @@ export default function Home() {
 
   const goToNext = useCallback(() => {
     handleTransition(() => { setCurrentIndex((prev) => (prev + 1) % slideData.length); });
-  }, [isTransitioning]);
+  }, [handleTransition]);
 
   const goToPrevious = () => {
     handleTransition(() => { setCurrentIndex((prev) => (prev - 1 + slideData.length) % slideData.length); });
@@ -279,7 +277,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8">
-            {reviewData.map((review, index) => (
+            {reviewData.map((review) => (
               <div
                 key={review.id}
                 className="bg-white rounded-xl p-6 flex flex-col justify-between min-h-40 shadow-lg hover:shadow-xl transition-shadow duration-300"
