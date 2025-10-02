@@ -4,11 +4,14 @@ import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Youtube, Linkedin, Instagram, ArrowRight } from 'lucide-react';
+
+// --- 슬라이더 데이터 수정: public 디렉토리의 이미지 파일 연결 ---
 const slideData = [
-  { id: 0, title: "새롭게 달라진\nEHS Friends", subtitle: "전문적인 환경, 안전, 보건 컨설팅으로\n귀사의 경쟁력을 높여보세요.", imagePlaceholder: "메인 비주얼 영역 1" },
-  { id: 1, title: "화학물질관리\n전문 컨설팅", subtitle: "복잡한 화학물질 규제, EHS Friends가\n명확한 해결책을 제시합니다.", imagePlaceholder: "메인 비주얼 영역 2" },
-  { id: 2, title: "위험성 평가 및\n작업환경개선", subtitle: "사업장의 잠재적 위험을 진단하고\n안전한 일터를 만들어갑니다.", imagePlaceholder: "메인 비주얼 영역 3" },
+  { id: 0, title: "새롭게 달라진\nEHS Friends", subtitle: "전문적인 환경, 안전, 보건 컨설팅으로\n귀사의 경쟁력을 높여보세요.", imageSrc: "/1.jpg" },
+  { id: 1, title: "화학물질관리\n전문 컨설팅", subtitle: "복잡한 화학물질 규제, EHS Friends가\n명확한 해결책을 제시합니다.", imageSrc: "/2.jpg" },
+  { id: 2, title: "위험성 평가 및\n작업환경개선", subtitle: "사업장의 잠재적 위험을 진단하고\n안전한 일터를 만들어갑니다.", imageSrc: "/3.jpg" },
 ];
+// ----------------------------
 
 const featureData = [
   { title: "Compliance", description: "체계적인 EHS\n법규 준수", iconSrc: "/security.png", bgColor: "bg-blue-50" },
@@ -17,15 +20,17 @@ const featureData = [
   { title: "Reporting", description: "데이터 기반\n보고서 제공", iconSrc: "/report.png", bgColor: "bg-yellow-50" },
 ];
 
+// --- 컨설팅 서비스 데이터 수정: public 디렉토리의 이미지 파일 연결 (4.jpg부터 9.jpg까지 사용, 마지막 1개는 1.jpg 또는 적절한 대체 이미지) ---
 const consultingServices = [
-  { name: "근골격계 유해요인조사", description: "작업장 내 근골격계 부담 작업의 유해요인을 찾아내고, 인간공학적 분석을 통해 개선 대책을 수립하여 작업 능률 향상과 산업 재해 예방에 기여합니다.", imageSrc: "https://placehold.co/500x400/2563EB/FFFFFF/png" },
-  { name: "화학물질관리 컨설팅", description: "화학물질관리법(화관법), 산업안전보건법 등 복잡한 규제에 대응하여 화학물질 인벤토리 구축, 취급시설 관리, 보고 및 허가 업무를 지원합니다.", imageSrc: "https://placehold.co/500x400/2563EB/FFFFFF/png" },
-  { name: "보건관리 위탁대행", description: "전문 인력과 체계적인 시스템을 통해 사업장의 보건관리 업무를 효율적으로 대행하며, 근로자의 건강 증진과 쾌적한 작업환경 조성을 돕습니다.", imageSrc: "https://placehold.co/500x400/2563EB/FFFFFF/png" },
-  { name: "위험성평가 컨설팅", description: "사업장 내 모든 유해·위험요인을 파악하고 각 요인에 대한 위험성을 추정·결정하여, 체계적이고 지속적인 위험 감소 대책을 수립하도록 지원합니다.", imageSrc: "https://placehold.co/500x400/2563EB/FFFFFF/png" },
-  { name: "작업환경개선 컨설팅", description: "소음, 분진, 유해화학물질 등 작업환경의 유해요인을 측정 및 평가하고, 공학적 대책 및 관리 방안을 제시하여 쾌적한 작업 환경을 조성합니다.", imageSrc: "https://placehold.co/500x400/2563EB/FFFFFF/png" },
-  { name: "공공기관 안전보건 컨설팅", description: "공공기관의 특성을 고려한 맞춤형 안전보건 경영체계 구축 및 이행을 지원하여, 안전한 공공서비스 환경을 만들어갑니다.", imageSrc: "https://placehold.co/500x400/2563EB/FFFFFF/png" },
-  { name: "산업보건지도사 컨설팅", description: "산업보건지도사의 전문적인 지식과 경험을 바탕으로 사업장 보건 문제에 대한 심층 진단과 종합적인 솔루션을 제공합니다.", imageSrc: "https://placehold.co/500x400/2563EB/FFFFFF/png" },
+  { name: "근골격계 유해요인조사", description: "작업장 내 근골격계 부담 작업의 유해요인을 찾아내고, 인간공학적 분석을 통해 개선 대책을 수립하여 작업 능률 향상과 산업 재해 예방에 기여합니다.", imageSrc: "/4.jpg" },
+  { name: "화학물질관리 컨설팅", description: "화학물질관리법(화관법), 산업안전보건법 등 복잡한 규제에 대응하여 화학물질 인벤토리 구축, 취급시설 관리, 보고 및 허가 업무를 지원합니다.", imageSrc: "/5.jpg" },
+  { name: "보건관리 위탁대행", description: "전문 인력과 체계적인 시스템을 통해 사업장의 보건관리 업무를 효율적으로 대행하며, 근로자의 건강 증진과 쾌적한 작업환경 조성을 돕습니다.", imageSrc: "/6.jpg" },
+  { name: "위험성평가 컨설팅", description: "사업장 내 모든 유해·위험요인을 파악하고 각 요인에 대한 위험성을 추정·결정하여, 체계적이고 지속적인 위험 감소 대책을 수립하도록 지원합니다.", imageSrc: "/7.jpg" },
+  { name: "작업환경개선 컨설팅", description: "소음, 분진, 유해화학물질 등 작업환경의 유해요인을 측정 및 평가하고, 공학적 대책 및 관리 방안을 제시하여 쾌적한 작업 환경을 조성합니다.", imageSrc: "/8.jpg" },
+  { name: "공공기관 안전보건 컨설팅", description: "공공기관의 특성을 고려한 맞춤형 안전보건 경영체계 구축 및 이행을 지원하여, 안전한 공공서비스 환경을 만들어갑니다.", imageSrc: "/9.jpg" },
+  { name: "산업보건지도사 컨설팅", description: "산업보건지도사의 전문적인 지식과 경험을 바탕으로 사업장 보건 문제에 대한 심층 진단과 종합적인 솔루션을 제공합니다.", imageSrc: "/1.jpg" }, // 1.jpg를 다시 사용하거나, 다른 적절한 이미지로 교체해주세요.
 ];
+// --------------------------------------------------
 
 const reviewData = [
   { id: 1, text: "복잡한 법규 문제 때문에 골치 아팠는데, 전문가분들이 오셔서 깔끔하게 해결해 주셨어요. 덕분에 본업에 집중할 수 있게 되었습니다.", author: "A사 이사", tag: "Compliance" },
@@ -72,7 +77,6 @@ export default function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeTab, setActiveTab] = useState(consultingServices[0].name);
 
   useEffect(() => {
     const handleScroll = () => { setScrolled(window.scrollY > 10); };
@@ -80,7 +84,7 @@ export default function Home() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleTransition = (callback: () => void) => {
+  const handleTransition = (callback) => {
     if (isTransitioning) return;
     setIsTransitioning(true);
     callback();
@@ -100,10 +104,9 @@ export default function Home() {
     return () => clearInterval(timer);
   }, [goToNext]);
 
-  const activeService = consultingServices.find(service => service.name === activeTab);
-
   return (
     <main>
+      {/* 헤더 부분은 이전과 동일하게 유지됩니다. */}
       <header className={`sticky top-0 z-50 py-4 transition-all duration-300 ${scrolled ? 'bg-white shadow-md' : 'bg-transparent'}`}>
         <div className="container mx-auto px-6 lg:px-8">
           <nav className={`flex items-center justify-between transition-colors duration-300 ${scrolled ? 'text-gray-900' : 'text-white'}`}>
@@ -134,9 +137,17 @@ export default function Home() {
                       <motion.h1 variants={titleVariants} className="text-4xl lg:text-5xl font-extrabold leading-tight mb-4 whitespace-pre-line">{slideData[currentIndex].title}</motion.h1>
                       <motion.p variants={subtitleVariants} className="text-lg lg:text-xl text-blue-100 mb-8 whitespace-pre-line">{slideData[currentIndex].subtitle}</motion.p>
                     </div>
+                    {/* 메인 비주얼 슬라이더 이미지 영역 수정 */}
                     <div className="flex items-center justify-center w-full h-64 md:h-96">
-                      <div className="w-full h-full bg-white/10 rounded-2xl flex items-center justify-center border border-white/20">
-                        <p className="text-blue-200">{slideData[currentIndex].imagePlaceholder}</p>
+                      <div className="w-full h-full relative rounded-2xl overflow-hidden shadow-xl">
+                        <Image
+                          src={slideData[currentIndex].imageSrc}
+                          alt={slideData[currentIndex].title}
+                          layout="fill"
+                          objectFit="cover"
+                          unoptimized
+                          priority={currentIndex === 0} // 첫 번째 이미지만 우선순위 높게 설정
+                        />
                       </div>
                     </div>
                   </div>
@@ -154,61 +165,87 @@ export default function Home() {
         </div>
       </section>
 
+      {/* --- EHS 컨설팅 서비스 섹션: 7개 서비스를 2줄(4개 + 3개) 그리드 형태로 변경 --- */}
       <section className="bg-slate-50 py-20 sm:py-24">
         <div className="container mx-auto px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">EHS 컨설팅 서비스</h2>
             <p className="mt-4 text-lg text-gray-600">최고의 전문가들이 환경안전보건 문제를 해결해 드립니다.</p>
           </div>
-          <div className="flex justify-center mb-12">
-            <div className="flex flex-wrap justify-center gap-2 bg-slate-100 p-3 rounded-full max-w-full">
-              {consultingServices.map((service) => (
-                <button
+
+          <div className="flex flex-col gap-6 md:gap-8">
+            {/* 첫 번째 줄: 4개 서비스 (데스크톱: 4열) */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+              {consultingServices.slice(0, 4).map((service, index) => (
+                <motion.div
                   key={service.name}
-                  onClick={() => setActiveTab(service.name)}
-                  className={`
-                    px-4 py-3 text-xs sm:text-sm font-semibold rounded-full 
-                    transition-colors duration-300 flex-shrink-0 
-                    ${activeTab === service.name
-                      ? 'bg-blue-500 text-white shadow-md'
-                      : 'text-gray-600 hover:bg-slate-300'
-                    }
-                  `}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden"
                 >
-                  {service.name}
-                </button>
+                  <div className="relative h-32 w-full">
+                    <Image
+                      src={service.imageSrc}
+                      alt={service.name}
+                      layout="fill"
+                      objectFit="cover"
+                      unoptimized
+                      className="transition-transform duration-300 hover:scale-105"
+                    />
+                  </div>
+                  <div className="p-4 md:p-6 text-center">
+                    <h3 className="text-lg font-bold text-gray-900 mb-2">{service.name}</h3>
+                    <p className="text-sm text-gray-500 line-clamp-2">{service.description}</p>
+                    <a
+                      href="#"
+                      className="mt-4 inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 transition-colors text-sm"
+                    >
+                      자세히 <ArrowRight size={14} className="ml-1" />
+                    </a>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* 두 번째 줄: 3개 서비스 (데스크톱: 중앙 정렬된 3열) */}
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto">
+              {consultingServices.slice(4).map((service, index) => (
+                <motion.div
+                  key={service.name}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.5, delay: (index + 4) * 0.1 }}
+                  className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden"
+                >
+                  <div className="relative h-32 w-full">
+                    <Image
+                      src={service.imageSrc}
+                      alt={service.name}
+                      layout="fill"
+                      objectFit="cover"
+                      unoptimized
+                      className="transition-transform duration-300 hover:scale-105"
+                    />
+                  </div>
+                  <div className="p-4 md:p-6 text-center">
+                    <h3 className="text-lg font-bold text-gray-900 mb-2">{service.name}</h3>
+                    <p className="text-sm text-gray-500 line-clamp-2">{service.description}</p>
+                    <a
+                      href="#"
+                      className="mt-4 inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 transition-colors text-sm"
+                    >
+                      자세히 <ArrowRight size={14} className="ml-1" />
+                    </a>
+                  </div>
+                </motion.div>
               ))}
             </div>
           </div>
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeTab}
-              initial={{ y: 10, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -10, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center"
-            >
-              <div className="text-center md:text-left">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">{activeService?.name}</h3>
-                <p className="text-gray-600 leading-relaxed">{activeService?.description}</p>
-              </div>
-              <div className="flex items-center justify-center md:justify-end">
-                <Image
-                  src={activeService?.imageSrc || ''}
-                  alt={activeService?.name || 'Consulting Service Image'}
-                  width={500}
-                  height={400}
-                  className="rounded-lg shadow-xl object-cover"
-                  unoptimized
-                />
-              </div>
-            </motion.div>
-          </AnimatePresence>
         </div>
       </section>
-
-
 
       <section className="bg-blue-100 py-12 sm:py-16">
         <div className="container mx-auto">
