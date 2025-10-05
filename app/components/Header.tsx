@@ -29,10 +29,10 @@ export default function Header({ defaultOpaque = false }: HeaderProps) {
                 <nav className={`flex items-center justify-between transition-colors duration-300 ${scrolled ? 'text-gray-900' : 'text-white'}`}>
                     <div className="text-2xl font-bold tracking-tight"><a href="/">EHS Friends</a></div>
                     <ul className="hidden md:flex items-center space-x-8">
-                        <li><a href="/specialist-network" className={`transition-colors ${scrolled ? 'hover:text-blue-600' : 'hover:text-blue-200'}`}>회사소개</a></li>
+                        <li><a href="/company-info" className={`transition-colors ${scrolled ? 'hover:text-blue-600' : 'hover:text-blue-200'}`}>회사소개</a></li>
                         <li><a href="/consulting/musculoskeletal-survey" className={`transition-colors ${scrolled ? 'hover:text-blue-600' : 'hover:text-blue-200'}`}>EHS 컨설팅</a></li>
-                        <li><a href="#" className={`transition-colors ${scrolled ? 'hover:text-blue-600' : 'hover:text-blue-200'}`}>실적</a></li>
-                        <li><a href="#" className={`transition-colors ${scrolled ? 'hover:text-blue-600' : 'hover:text-blue-200'}`}>전문가 네트워크</a></li>
+                        <li><a href="/performance" className={`transition-colors ${scrolled ? 'hover:text-blue-600' : 'hover:text-blue-200'}`}>실적</a></li>
+                        <li><a href="/specialist-network" className={`transition-colors ${scrolled ? 'hover:text-blue-600' : 'hover:text-blue-200'}`}>전문가 네트워크</a></li>
                     </ul>
                     <div className="flex items-center space-x-4">
                         <a href="#" className={`hidden sm:inline text-sm font-medium transition-colors ${scrolled ? 'hover:text-blue-600' : 'hover:text-blue-200'}`}>로그인</a>
