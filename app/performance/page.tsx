@@ -75,27 +75,6 @@ export default function CompanyInfoPage() {
         <>
             <Header defaultOpaque />
             <main className="bg-white">
-                <section className="bg-slate-50 py-20">
-                    <div className="container mx-auto px-6 text-center">
-                        <motion.h1
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.7 }}
-                            className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl"
-                        >
-                            사업 실적
-                        </motion.h1>
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.7, delay: 0.2 }}
-                            className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto"
-                        >
-                            EHS Friends는 다양한 산업 분야의 고객들과 함께하며 신뢰와 전문성을 바탕으로 성장해왔습니다.
-                        </motion.p>
-                    </div>
-                </section>
-
                 <section className="py-24">
                     <div className="container mx-auto px-6">
                         <h2 className="text-3xl font-bold text-center text-gray-900 mb-16">주요 사업 실적</h2>

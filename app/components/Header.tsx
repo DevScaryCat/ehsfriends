@@ -35,7 +35,6 @@ export default function Header({ defaultOpaque = false }: HeaderProps) {
                         <li><a href="/specialist-network" className={`transition-colors ${scrolled ? 'hover:text-blue-600' : 'hover:text-blue-200'}`}>전문가 네트워크</a></li>
                     </ul>
                     <div className="flex items-center space-x-4">
-                        <a href="#" className={`hidden sm:inline text-sm font-medium transition-colors ${scrolled ? 'hover:text-blue-600' : 'hover:text-blue-200'}`}>로그인</a>
                         <a href="#" className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-5 rounded-full transition-colors text-sm shadow-lg">상담 신청</a>
                     </div>
                 </nav>

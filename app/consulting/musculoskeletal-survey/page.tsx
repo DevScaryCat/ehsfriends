@@ -4,6 +4,7 @@
 import Header from '@/app/components/Header';
 import Footer from '@/app/components/Footer';
 import SideNavigation from '@/app/components/SideNavigation';
+import PageHero from '@/app/components/PageHero';
 
 export default function MusculoskeletalSurveyPage() {
     const navItems = [
@@ -17,6 +18,10 @@ export default function MusculoskeletalSurveyPage() {
     return (
         <>
             <Header defaultOpaque />
+            <PageHero
+                title="근골격계 부담작업 유해요인 조사"
+                subtitle="EHS Friends는 다양한 산업 분야의 고객들과 함께하며 신뢰와 전문성을 바탕으로 성장해왔습니다."
+            />
             <main className="bg-white min-h-screen">
                 <div className="container mx-auto px-6 py-16">
                     <div className="flex flex-col md:flex-row gap-12">
