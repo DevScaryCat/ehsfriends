@@ -1,71 +1,6 @@
 // app/page.tsx
-import { Briefcase, Calendar, MessageSquare, Search, ChevronRight, TrendingUp, Users } from 'lucide-react';
-
-// 남색 계열만 사용하도록 컬러 팔레트 통일
-const PRIMARY_COLOR = 'slate-700'; // 주로 사용될 남색 (#1e40af)
-const FOOTER_BG = 'gray-900'; // 푸터 배경색: 검정 계열
-
-// --- Components ---
-
-/**
- * @component Header: 최상단 네비게이션 및 로고 영역
- */
-const Header = () => {
-  return (
-    <header className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-10">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* 상단 유틸리티 및 검색 영역 (모바일에서도 유지) */}
-        <div className="flex justify-end items-center py-2 text-sm text-gray-600 border-b border-gray-100">
-          <a href="#" className={`hover:text-${PRIMARY_COLOR} transition duration-150 ease-in-out px-3`}>
-            로그인
-          </a>
-          <a href="#" className={`hover:text-${PRIMARY_COLOR} transition duration-150 ease-in-out px-3 border-l border-gray-300`}>
-            사이트맵
-          </a>
-          <div className="relative ml-4 hidden sm:block"> {/* 검색창은 작은 화면에서 숨김 */}
-            <input
-              type="text"
-              placeholder="통합 검색"
-              className="pl-2 pr-8 py-1 border border-gray-300 rounded-sm focus:ring-blue-500 focus:border-blue-500 w-32 text-xs"
-            />
-            <Search className="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500 cursor-pointer" />
-          </div>
-        </div>
-
-        {/* 로고 및 주 메뉴 영역 (반응형: 모바일에서 세로 쌓임) */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center py-6">
-          <div className={`text-3xl font-serif font-bold text-${PRIMARY_COLOR} mb-4 md:mb-0`}>
-            EHS Friends
-          </div>
-          <nav className="w-full md:w-auto">
-            <ul className="flex flex-wrap md:flex-nowrap space-x-4 md:space-x-8 text-sm md:text-lg font-semibold text-gray-700">
-              <MenuItem title="EHS 소개" href="/about" />
-              <MenuItem title="환경 정보" href="/environment" />
-              <MenuItem title="보건 정보" href="/health" />
-              <MenuItem title="안전 정보" href="/safety" />
-              <MenuItem title="커뮤니티" href="/community" />
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </header>
-  );
-};
-
-/**
- * @component MenuItem: 네비게이션 아이템
- */
-const MenuItem = ({ title, href }: { title: string; href: string }) => (
-  <li>
-    <a
-      href={href}
-      className={`block py-2 text-gray-700 hover:text-${PRIMARY_COLOR} border-b-2 border-transparent hover:border-${PRIMARY_COLOR} transition duration-150 ease-in-out`}
-    >
-      {title}
-    </a>
-  </li>
-);
-
+import { Briefcase, Search, ChevronRight, TrendingUp, Users } from 'lucide-react';
+import { Header, Footer, PRIMARY_COLOR } from './components/CommonLayout';
 
 /**
  * @component StatBox: Hero Section 오른쪽 통계 박스
@@ -96,13 +31,13 @@ const HeroSection = () => {
   return (
     <div className={`bg-gray-100 border-b border-gray-300`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16 flex flex-col md:flex-row items-center">
-        {/* 이미지/비주얼 영역 (모바일에서 100%, 데스크톱에서 2/3) */}
+        {/* 이미지/비주얼 영역 */}
         <div className="w-full md:w-2/3 md:pr-10 mb-8 md:mb-0">
           <div className="h-64 md:h-96 bg-gray-300 flex items-center justify-center text-xl text-gray-700 border border-gray-400">
             [슬라이드 쇼] EHS 분야별 주요 사진 및 메시지
           </div>
         </div>
-        {/* 핵심 통계 박스 영역 (모바일에서 100%, 데스크톱에서 1/3) */}
+        {/* 핵심 통계 박스 영역 */}
         <div className="w-full md:w-1/3 space-y-4">
           {stats.map((stat, index) => (
             <StatBox key={index} {...stat} />
@@ -122,7 +57,6 @@ const ConsultingItem = ({ title, description, href, imageUrl }: { title: string;
     <a
       href={href}
       className={`relative h-48 block group overflow-hidden border border-gray-300 shadow-sm hover:shadow-xl transition duration-300 ease-in-out`}
-      // 배경 이미지 설정 (Lorem Picsum)
       style={{ backgroundImage: `url(${imageUrl})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
     >
       {/* 1. 이미지 어둡게 만드는 오버레이 */}
@@ -130,13 +64,11 @@ const ConsultingItem = ({ title, description, href, imageUrl }: { title: string;
 
       {/* 2. 기본 상태: 하단 그라데이션과 타이틀만 표시 */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex flex-col justify-end p-4 text-white transition-opacity duration-300 ease-in-out pointer-events-none">
-        {/* 호버 시 타이틀도 사라지게 */}
         <h3 className="text-lg font-bold mb-1 transition-opacity duration-300 ease-in-out group-hover:opacity-0">{title}</h3>
       </div>
 
-      {/* 3. 호버 상태: 남색 오버레이 + 상세 정보 + 버튼 (숨겨져 있다가 나타남) */}
+      {/* 3. 호버 상태: 남색 오버레이 + 상세 정보 + 버튼 */}
       <div className={`absolute inset-0 bg-${PRIMARY_COLOR} bg-opacity-90 flex flex-col items-center justify-center p-4 text-white opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100`}>
-        {/* 호버 시 나타나는 타이틀 */}
         <h3 className="text-xl font-bold mb-2 text-center">{title}</h3>
         <p className="text-sm text-center mb-4 font-light line-clamp-3">{description}</p>
         <div
@@ -163,60 +95,12 @@ const ContentBlock = ({ title, children }: { title: string; children: React.Reac
   </div>
 );
 
-/**
- * @component Footer: 하단 정보 영역 (배경색 bg-gray-900로 수정)
- */
-const Footer = () => {
-  return (
-    <footer className={`bg-${FOOTER_BG} text-white mt-12`}>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 border-b border-gray-700 pb-8 mb-8">
-          <div>
-            <h4 className="text-lg font-semibold mb-3 text-white">주요 메뉴</h4>
-            <ul className="space-y-2 text-sm">
-              <li><a href="/about" className="hover:text-gray-300">기관 소개</a></li>
-              <li><a href="/faq" className="hover:text-gray-300">자주 묻는 질문</a></li>
-              <li><a href="/sitemap" className="hover:text-gray-300">사이트맵</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-lg font-semibold mb-3 text-white">환경 분야</h4>
-            <ul className="space-y-2 text-sm">
-              <li><a href="#" className="hover:text-gray-300">대기/수질 정보</a></li>
-              <li><a href="#" className="hover:text-gray-300">폐기물 처리</a></li>
-            </ul>
-          </div>
-          <div className="col-span-2 md:col-span-1">
-            <h4 className="text-lg font-semibold mb-3 text-white">보건/안전 분야</h4>
-            <ul className="space-y-2 text-sm">
-              <li><a href="#" className="hover:text-gray-300">산업 보건</a></li>
-              <li><a href="#" className="hover:text-gray-300">안전 관리 규정</a></li>
-            </ul>
-          </div>
-          <div className="col-span-2 md:col-span-1">
-            <h4 className="text-lg font-semibold mb-3 text-white">연락처</h4>
-            <p className="text-sm">
-              (06001) 서울특별시 강남구 EHS로 123<br />
-              전화: 02-1234-5678<br />
-              이메일: contact@ehsfriends.co.kr
-            </p>
-          </div>
-        </div>
-        <div className="text-center text-sm text-gray-400">
-          Copyright © 2025 EHS Friends. All Rights Reserved.
-        </div>
-      </div>
-    </footer>
-  );
-};
-
 // --- Main Page ---
 
 /**
  * @page HomePage: EHS 메인 페이지
  */
 export default function EHSPage() {
-  // Lorem Picsum URL 사용
   const consultingServices = [
     { title: "EHS 컨설팅", desc: "전반적인 EHS 시스템 구축 및 운영 자문", href: "/consulting/ehs", imageUrl: "https://picsum.photos/id/20/400/300" },
     { title: "근골격계부담작업 유해요인조사", desc: "근골격계 질환 예방을 위한 유해요인 정밀 조사 및 개선", href: "/consulting/msds", imageUrl: "https://picsum.photos/id/21/400/300" },
@@ -230,15 +114,15 @@ export default function EHSPage() {
 
   return (
     <div className="font-sans bg-white min-h-screen">
-      <Header />
+      <Header /> {/* 컴포넌트 적용 */}
       <main>
-        {/* Hero Section: 왼쪽 비주얼 + 오른쪽 3개 통계 박스 */}
         <HeroSection />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
 
           {/* EHS 컨설팅 메뉴 섹션 */}
           <div>
+            <h2 className={`text-2xl font-bold mb-6 text-${PRIMARY_COLOR} text-center`}>주요 컨설팅 서비스</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
               {consultingServices.map((service, index) => (
                 <ConsultingItem
@@ -266,9 +150,9 @@ export default function EHSPage() {
             <ContentBlock title="주요 뉴스">
               <ul className="space-y-2 text-sm text-gray-700">
                 <li><a href="/detail/5" className={`hover:text-${PRIMARY_COLOR} block truncate py-1`}>정부, 산업재해 예방 위한 '고위험 사업장' 집중 관리</a></li>
-                <li><a href="/detail/6" className={`hover:text-${PRIMARY_COLOR} block truncate py-1`}>기후 변화 대응을 위한 기업의 환경 경영 전략</a></li>
-                <li><a href="/detail/7" className={`hover:text-${PRIMARY_COLOR} block truncate py-1`}>미세먼지 저감 기술, EHS 산업의 새로운 동력</a></li>
-                <li><a href="/detail/8" className={`hover:text-${PRIMARY_COLOR} block truncate py-1`}>직장인 정신 건강 증진을 위한 보건 프로그램</a></li>
+                <li><a href="/detail/6" className="hover:text-gray-700 block truncate py-1">기후 변화 대응을 위한 기업의 환경 경영 전략</a></li>
+                <li><a href="/detail/7" className="hover:text-gray-700 block truncate py-1">미세먼지 저감 기술, EHS 산업의 새로운 동력</a></li>
+                <li><a href="/detail/8" className="hover:text-gray-700 block truncate py-1">직장인 정신 건강 증진을 위한 보건 프로그램</a></li>
               </ul>
             </ContentBlock>
 
@@ -284,7 +168,7 @@ export default function EHSPage() {
 
         </div>
       </main>
-      <Footer />
+      <Footer /> {/* 컴포넌트 적용 */}
     </div>
   );
 }
