@@ -132,7 +132,7 @@ export const Header = () => {
  */
 export const Footer = () => {
     return (
-        <footer className={`bg-slate-900 text-white mt-12`}>
+        <footer className={`bg-slate-950 text-white mt-12`}>
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8 border-b border-gray-700 pb-8 mb-8">
                     <div>
