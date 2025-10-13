@@ -6,13 +6,14 @@ export const PRIMARY_COLOR = 'slate-700'; // 남색 (#1e40af)
 export const FOOTER_BG = 'gray-900'; // 푸터 배경색: 검정 계열
 
 /**
- * @component MenuItem: 네비게이션 아이템
+ * @component SubMenuItem: 드롭다운 하위 메뉴 아이템
  */
-const MenuItem = ({ title, href }: { title: string; href: string }) => (
+const SubMenuItem = ({ title, href }: { title: string; href: string }) => (
     <li>
         <a
             href={href}
-            className={`block py-2 text-gray-700 hover:text-${PRIMARY_COLOR} border-b-2 border-transparent hover:border-${PRIMARY_COLOR} transition duration-150 ease-in-out`}
+            // w-max 클래스를 사용하여 텍스트 길이에 맞춰 드롭다운 너비 자동 조정
+            className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-${PRIMARY_COLOR} transition duration-150 ease-in-out whitespace-nowrap`}
         >
             {title}
         </a>
@@ -20,9 +21,63 @@ const MenuItem = ({ title, href }: { title: string; href: string }) => (
 );
 
 /**
+ * @component NavItem: 상위 메뉴 아이템 (드롭다운 포함 가능)
+ */
+const NavItem = ({ title, href, subMenus }: { title: string; href: string; subMenus?: { title: string; href: string; }[] }) => {
+    const isDropdown = subMenus && subMenus.length > 0;
+
+    // 상위 메뉴 링크 스타일
+    const linkClasses = `block py-2 text-gray-700 font-semibold md:text-lg border-b-2 border-transparent hover:border-${PRIMARY_COLOR} hover:text-${PRIMARY_COLOR} transition duration-150 ease-in-out`;
+
+    return (
+        // group 클래스를 사용하여 group-hover로 드롭다운 표시 (PC 환경)
+        <li className={`relative ${isDropdown ? 'group' : ''}`}>
+            {/* 상위 메뉴 링크 */}
+            <a
+                href={href}
+                className={linkClasses}
+            >
+                {title}
+            </a>
+
+            {/* 드롭다운 메뉴 (hover 시 표시) */}
+            {isDropdown && (
+                <ul className={`absolute left-0 mt-0 w-max bg-white border border-gray-200 shadow-lg py-1 z-20 hidden group-hover:block`}>
+                    {subMenus.map((item, index) => (
+                        <SubMenuItem key={index} {...item} />
+                    ))}
+                </ul>
+            )}
+        </li>
+    );
+};
+
+
+/**
  * @component Header: 최상단 네비게이션 및 로고 영역 (반응형 적용)
  */
 export const Header = () => {
+
+    // 새로운 네비게이션 구조 정의
+    const navItems = [
+        { title: "EHS 소개", href: "/about" },
+        {
+            title: "업무 안내",
+            href: "/service",
+            subMenus: [
+                { title: "EHS컨설팅", href: "/service/ehs" },
+                { title: "화학물질관리 컨설팅", href: "/service/chemical" },
+                { title: "근골격계 유해요인조사", href: "/service/msds" },
+                { title: "보건관리위탁", href: "/service/health-mgmt" },
+                { title: "위험성평가", href: "/service/risk-assessment" },
+                { title: "작업환경개선 컨설팅", href: "/service/work-env" },
+                { title: "산업보건지도사 컨설팅", href: "/service/health-pro" },
+            ]
+        },
+        { title: "알림소식", href: "/news" },
+        // 상담신청은 별도로 버튼 스타일로 처리
+    ];
+
     return (
         <header className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-10">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -49,13 +104,21 @@ export const Header = () => {
                     <a href='/' className={`text-3xl font-bold text-${PRIMARY_COLOR} mb-4 md:mb-0 font-sans`}>
                         EHS Friends
                     </a>
+                    {/* 메인 네비게이션 리스트 */}
                     <nav className="w-full md:w-auto">
-                        <ul className="flex flex-wrap md:flex-nowrap space-x-4 md:space-x-8 text-sm md:text-lg font-semibold text-gray-700">
-                            <MenuItem title="EHS 소개" href="/about" />
-                            <MenuItem title="환경 정보" href="/environment" />
-                            <MenuItem title="보건 정보" href="/health" />
-                            <MenuItem title="안전 정보" href="/safety" />
-                            <MenuItem title="커뮤니티" href="/community" />
+                        <ul className="flex flex-wrap md:flex-nowrap space-x-4 md:space-x-8 items-center text-sm md:text-lg font-semibold text-gray-700">
+                            {navItems.map((item, index) => (
+                                <NavItem key={index} {...item} />
+                            ))}
+                            {/* 상담 신청 버튼 (다른 느낌 적용) */}
+                            <li>
+                                <a
+                                    href="/contact"
+                                    className={`inline-block px-4 py-2 text-sm md:text-base font-bold bg-${PRIMARY_COLOR} text-white rounded hover:bg-blue-700 transition duration-150 ease-in-out whitespace-nowrap`}
+                                >
+                                    상담신청
+                                </a>
+                            </li>
                         </ul>
                     </nav>
                 </div>
