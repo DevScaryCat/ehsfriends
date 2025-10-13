@@ -1,6 +1,6 @@
 // app/page.tsx
 import { Briefcase, Search, ChevronRight, TrendingUp, Users } from 'lucide-react';
-import { Header, Footer, PRIMARY_COLOR } from './components/CommonLayout';
+import { Header, Footer, PRIMARY_COLOR, FOOTER_BG } from './components/CommonLayout';
 
 /**
  * @component StatBox: Hero Section 오른쪽 통계 박스
@@ -68,7 +68,7 @@ const ConsultingItem = ({ title, description, href, imageUrl }: { title: string;
       </div>
 
       {/* 3. 호버 상태: 남색 오버레이 + 상세 정보 + 버튼 */}
-      <div className={`absolute inset-0 bg-${PRIMARY_COLOR} bg-opacity-90 flex flex-col items-center justify-center p-4 text-white opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100`}>
+      <div className={`absolute inset-0 bg-black bg-opacity-20 flex flex-col items-center justify-center p-4 text-white opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100`}>
         <h3 className="text-xl font-bold mb-2 text-center">{title}</h3>
         <p className="text-sm text-center mb-4 font-light line-clamp-3">{description}</p>
         <div
@@ -122,7 +122,6 @@ export default function EHSPage() {
 
           {/* EHS 컨설팅 메뉴 섹션 */}
           <div>
-            <h2 className={`text-2xl font-bold mb-6 text-${PRIMARY_COLOR} text-center`}>주요 컨설팅 서비스</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
               {consultingServices.map((service, index) => (
                 <ConsultingItem
