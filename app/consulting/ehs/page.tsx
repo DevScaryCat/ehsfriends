@@ -1,7 +1,7 @@
 // app/consulting/ehs/page.tsx
 import { Search, ChevronRight, Home } from 'lucide-react';
 
-// 공통 상수 및 컴포넌트 (반응형 코드 유지)
+// 공통 상수 및 컴포넌트
 const PRIMARY_COLOR = 'blue-800'; // 남색 (#1e40af)
 const FOOTER_BG = 'gray-900'; // 푸터 배경색: 검정 계열
 
@@ -65,28 +65,11 @@ const Header = () => {
 };
 
 /**
- * @component Breadcrumbs: 서브 페이지 경로 표시
- */
-const Breadcrumbs = () => {
-    return (
-        <nav className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 text-sm text-gray-500 border-b border-gray-200 bg-white">
-            <ol className="flex items-center space-x-2">
-                <li><a href="/" className="hover:text-blue-700"><Home className="w-4 h-4 inline-block text-gray-400" /></a></li>
-                <ChevronRight className="w-4 h-4" />
-                <li><a href="/consulting" className="hover:text-blue-700 font-semibold">컨설팅</a></li>
-                <ChevronRight className="w-4 h-4" />
-                <li className={`text-${PRIMARY_COLOR} font-bold`}>EHS 컨설팅</li>
-            </ol>
-        </nav>
-    );
-};
-
-/**
  * @component PageHero: 페이지 상단 배너 (HSS 스타일)
  */
 const PageHero = () => {
     return (
-        // 배경 이미지 사용 (HSS Health Library 스타일 반영)
+        // 배경 이미지 사용
         <div
             className="relative w-full h-64 md:h-80 bg-gray-300 flex items-center"
             style={{ backgroundImage: 'url(https://picsum.photos/id/10/1600/500)', backgroundSize: 'cover', backgroundPosition: 'center' }}
@@ -135,52 +118,6 @@ const MainContentTabs = () => {
     );
 };
 
-
-/**
- * @component SidebarNav: 우측 컨텍스트 메뉴
- */
-const SidebarNav = () => {
-    const consultList = [
-        { title: "EHS 컨설팅 (현재)", href: "/consulting/ehs", current: true },
-        { title: "근골격계 유해요인 조사", href: "/consulting/msds", current: false },
-        { title: "화학물질 관리", href: "/consulting/chemical", current: false },
-        { title: "보건관리 위탁", href: "/consulting/health-mgmt", current: false },
-        { title: "위험성 평가", href: "/consulting/risk-assessment", current: false },
-        { title: "작업환경 개선", href: "/consulting/work-env", current: false },
-    ];
-
-    return (
-        <div className="space-y-6">
-            {/* 1. 컨설팅 목록 (Sub-menu 역할) */}
-            <nav className={`border border-gray-300 bg-white shadow-sm`}>
-                <h3 className={`bg-${PRIMARY_COLOR} text-white text-lg font-bold p-3`}>컨설팅 분야</h3>
-                <ul className="divide-y divide-gray-200">
-                    {consultList.map((item) => (
-                        <li key={item.title}>
-                            <a
-                                href={item.href}
-                                className={`flex justify-between items-center p-3 text-gray-700 transition hover:bg-gray-100 ${item.current ? `bg-gray-100 text-${PRIMARY_COLOR} font-bold` : ''
-                                    }`}
-                            >
-                                {item.title}
-                                <ChevronRight className="w-4 h-4 text-gray-500" />
-                            </a>
-                        </li>
-                    ))}
-                </ul>
-            </nav>
-
-            {/* 2. 빠른 문의 CTA */}
-            <div className={`p-4 border-t-4 border-${PRIMARY_COLOR} bg-gray-50 shadow-md text-center`}>
-                <h4 className="text-xl font-bold mb-3 text-gray-800">빠른 문의</h4>
-                <p className="text-sm text-gray-600 mb-4">EHS 컨설팅 관련 궁금증을 해결해 드립니다.</p>
-                <button className={`w-full py-2 bg-${PRIMARY_COLOR} text-white font-semibold hover:bg-blue-700 transition`}>
-                    상담 신청하기
-                </button>
-            </div>
-        </div>
-    );
-};
 
 /**
  * @component Footer: 하단 정보 영역
@@ -232,68 +169,82 @@ const Footer = () => {
 // --- Main Page ---
 
 /**
- * @page EHSConsultingPage: EHS 컨설팅 상세 페이지
+ * @page EHSConsultingPage: EHS 컨설팅 상세 페이지 (1단 레이아웃)
  */
 export default function EHSConsultingPage() {
     return (
-        <div className="font-sans bg-gray-50 min-h-screen">
+        <div className="font-sans bg-white min-h-screen">
             <Header />
-            <PageHero /> {/* HSS 스타일의 풀사이즈 배너 */}
-            <Breadcrumbs />
+            <PageHero />
+
+            {/* Breadcrumbs는 풀사이즈 콘텐츠 영역에 포함되어야 하므로 컨테이너 내부에 배치 */}
+            <nav className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 text-sm text-gray-500 border-b border-gray-200 bg-white">
+                <ol className="flex items-center space-x-2">
+                    <li><a href="/" className="hover:text-blue-700"><Home className="w-4 h-4 inline-block text-gray-400" /></a></li>
+                    <ChevronRight className="w-4 h-4" />
+                    <li><a href="/consulting" className="hover:text-blue-700 font-semibold">컨설팅</a></li>
+                    <ChevronRight className="w-4 h-4" />
+                    <li className={`text-${PRIMARY_COLOR} font-bold`}>EHS 컨설팅</li>
+                </ol>
+            </nav>
 
             <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
                 {/* 메인 콘텐츠 영역 상단 (HSS Continuing Education 페이지와 같은 탭 구조) */}
                 <MainContentTabs />
 
-                {/* 2단 반응형 콘텐츠 영역 (HSS 디테일 페이지 핵심 구조) */}
-                <div className="flex flex-col md:flex-row gap-8">
+                {/* 1단 풀-사이즈 콘텐츠 영역 (HSS 교육 페이지 구조) */}
+                <div className="w-full space-y-8">
 
-                    {/* 메인 콘텐츠 영역 (데스크톱: 3/4, 모바일: 100%) */}
-                    <section className="w-full md:w-3/4 space-y-8 bg-white p-6 border border-gray-200 shadow-sm">
-
-                        <h2 className="text-2xl font-bold text-gray-800 border-b border-gray-200 pb-2">EHS 통합 관리 시스템 구축</h2>
+                    <section className="space-y-6">
+                        <h2 className="text-2xl font-bold text-gray-800">EHS 통합 관리 시스템 개요</h2>
                         <p className="text-gray-700 leading-relaxed">
                             저희 EHS 컨설팅은 강화되는 국내외 환경, 보건, 안전 규제에 효과적으로 대응하고, 기업의 지속 가능한 성장을 위한 최적의 **통합 EHS 시스템** 구축을 지원합니다.
                             각 산업 분야별 특성을 깊이 분석하여 리스크를 최소화하고 선진 안전 문화를 정착시키는 **맞춤형 전략과 실질적인 솔루션**을 제공합니다.
                         </p>
 
-                        <h3 className={`text-xl font-bold text-${PRIMARY_COLOR} pt-4`}>컨설팅 범위 및 특징</h3>
+                        <h3 className={`text-xl font-bold text-${PRIMARY_COLOR} pt-4`}>주요 컨설팅 프로그램 목록</h3>
                         <ul className="list-disc list-inside space-y-2 pl-4 text-gray-700">
-                            <li>ISO 14001(환경) 및 ISO 45001(안전보건) 통합 인증 체계 지원</li>
-                            <li>화평법, 화관법 등 **환경 법규 준수(Compliance) 진단** 및 Gap 분석</li>
-                            <li>산업안전보건 기준 및 고위험 작업장 **안전 관리 체계** 확립</li>
-                            <li>직무 스트레스 관리, 건강 증진 등 **근로자 보건 관리 프로그램** 구축</li>
+                            <li>통합 EHS 관리 시스템(ISO 14001, ISO 45001 등) 구축 및 인증 지원</li>
+                            <li>법규 준수(Compliance) 진단 및 Gap 분석</li>
+                            <li>화학물질 관리, 폐기물 처리 등 환경 부문 리스크 평가</li>
+                            <li>산업안전보건 기준 및 고위험 작업장 안전 관리 체계 확립</li>
+                            <li>종사자 건강 증진 프로그램 및 산업 보건 관리 대행</li>
                         </ul>
 
-                        <h3 className={`text-xl font-bold text-${PRIMARY_COLOR} pt-4`}>수행 절차</h3>
-                        <div className="grid grid-cols-3 gap-4 text-center border p-4 bg-gray-50">
-                            <div className="w-full">
-                                <p className={`text-2xl font-bold text-${PRIMARY_COLOR}`}>1. 진단</p>
-                                <p className="text-gray-600 mt-1 text-sm">현행 시스템 및 법규 준수 수준 평가</p>
-                            </div>
-                            <div className="w-full">
-                                <p className={`text-2xl font-bold text-${PRIMARY_COLOR}`}>2. 설계</p>
-                                <p className="text-gray-600 mt-1 text-sm">통합 시스템 로드맵 및 맞춤 전략 수립</p>
-                            </div>
-                            <div className="w-full">
-                                <p className={`text-2xl font-bold text-${PRIMARY_COLOR}`}>3. 구축/지원</p>
-                                <p className="text-gray-600 mt-1 text-sm">시스템 실행 및 인증 심사 대응 지원</p>
-                            </div>
-                        </div>
-
-                        <p className="text-sm italic text-gray-500 pt-4">
-                            *본 컨설팅은 귀사의 ESG 경영 목표 달성과 지속 가능한 안전 문화 구축에 기여합니다.
-                        </p>
-
+                        <button className={`mt-6 px-6 py-3 bg-${PRIMARY_COLOR} text-white font-semibold hover:bg-blue-700 transition`}>
+                            컨설팅 시작하기
+                        </button>
                     </section>
 
-                    {/* 사이드바 영역 (데스크톱: 1/4, 모바일: 100%) */}
-                    <aside className="w-full md:w-1/4">
-                        <SidebarNav />
-                    </aside>
-                </div>
+                    <hr className="border-gray-200" />
 
+                    {/* HSS 페이지 하단처럼 회색 배경의 강조 블록 추가 */}
+                    <section className="bg-gray-100 p-6 border border-gray-200 text-center space-y-4">
+                        <h3 className="text-xl font-bold text-gray-800">EHS 전문가와 함께 기업의 미래를 설계하세요</h3>
+                        <p className="text-gray-600">
+                            20년 경력의 환경보건안전 전문가들이 귀사의 리스크를 진단하고 가장 현실적인 솔루션을 제공합니다.
+                        </p>
+                        <button className={`px-6 py-3 bg-white border border-${PRIMARY_COLOR} text-${PRIMARY_COLOR} font-semibold hover:bg-${PRIMARY_COLOR} hover:text-white transition`}>
+                            전문가 상담 신청
+                        </button>
+                    </section>
+
+                    <hr className="border-gray-200" />
+
+                    {/* 추가 정보 블록 */}
+                    <section className="space-y-4 text-sm text-gray-700">
+                        <h3 className="text-xl font-bold text-gray-800">참고 자료 및 유의사항</h3>
+                        <p className="italic">
+                            *컨설팅 과정에 사용되는 모든 자료는 법규 및 최신 기술 동향을 반영하여 업데이트되며, 고객사의 기밀 유지를 최우선으로 합니다.
+                        </p>
+                        <ul className="list-disc list-inside space-y-1 pl-4">
+                            <li><strong className={`text-${PRIMARY_COLOR}`}>이행 안내:</strong> 컨설팅은 초기 진단 후 3~6개월 기간 동안 단계별로 진행됩니다.</li>
+                            <li><strong className={`text-${PRIMARY_COLOR}`}>취소 및 환불 규정:</strong> 계약 후 7일 이내 해지 시 위약금 없이 전액 환불 가능합니다. (상세 내용은 계약서 참조)</li>
+                        </ul>
+                    </section>
+
+                </div>
             </main>
             <Footer />
         </div>
