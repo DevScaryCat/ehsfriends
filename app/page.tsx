@@ -2,7 +2,7 @@
 import { Briefcase, Calendar, MessageSquare, Search, ChevronRight, TrendingUp, Users } from 'lucide-react';
 
 // 남색 계열만 사용하도록 컬러 팔레트 통일
-const PRIMARY_COLOR = 'blue-800'; // 주로 사용될 남색 (#1e40af)
+const PRIMARY_COLOR = 'slate-700'; // 주로 사용될 남색 (#1e40af)
 const FOOTER_BG = 'gray-900'; // 푸터 배경색: 검정 계열
 
 // --- Components ---
