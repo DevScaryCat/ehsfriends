@@ -74,7 +74,7 @@ export const Header = () => {
                 { title: "산업보건지도사 컨설팅", href: "/service/health-pro" },
             ]
         },
-        { title: "알림소식", href: "/news" },
+        { title: "알림소식", href: "/notice" },
         // 상담신청은 별도로 버튼 스타일로 처리
     ];
 
