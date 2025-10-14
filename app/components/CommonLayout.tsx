@@ -110,11 +110,10 @@ export const Header = () => {
                             {navItems.map((item, index) => (
                                 <NavItem key={index} {...item} />
                             ))}
-                            {/* 상담 신청 버튼 (다른 느낌 적용) */}
                             <li>
                                 <a
                                     href="/contact"
-                                    className={`inline-block px-4 py-2 text-sm md:text-base font-bold bg-${PRIMARY_COLOR} text-white rounded hover:bg-blue-700 transition duration-150 ease-in-out whitespace-nowrap`}
+                                    className={`inline-block px-4 py-2 text-sm md:text-base bg-slate-700 text-white rounded hover:bg-slate-800 transition duration-150 ease-in-out whitespace-nowrap`}
                                 >
                                     상담신청
                                 </a>

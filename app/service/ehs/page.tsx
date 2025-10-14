@@ -112,9 +112,6 @@ export default function EHSConsultingPage() {
                                 <li>**산업 보건:** 직원 건강 증진 프로그램 및 산업 위생 모니터링 서비스.</li>
                             </ul>
 
-                            <button className={`mt-6 px-6 py-3 bg-${PRIMARY_COLOR} text-white font-semibold hover:bg-blue-700 transition`}>
-                                EHS 준수 감사 시작하기
-                            </button>
                         </section>
                     )}
 

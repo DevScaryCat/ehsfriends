@@ -5,13 +5,14 @@ import { Header, Footer, PRIMARY_COLOR } from '../components/CommonLayout'
 
 // 모의 데이터 (News/Announcement)
 const newsData = [
-    { id: 1, date: "2025.10.01", category: "공지", title: "2025년 하반기 안전 점검 의무 사항 안내", summary: "사업장 필수 안전 점검 항목 및 기한을 확인하십시오. 미이행 시 법적 처벌을 받을 수 있습니다.", href: "/news/1" },
-    { id: 2, date: "2025.09.25", category: "행사", title: "제15차 환경 보건 안전 전문가 포럼 개최", summary: "최신 EHS 동향 및 성공 사례 공유를 위한 전문가 포럼에 초대합니다.", href: "/news/2" },
-    { id: 3, date: "2025.09.15", category: "연구", title: "화학물질 관리 선진화 방안 연구 논문 발표", summary: "당사 연구진이 발표한 신규 화학물질 관리 시스템 도입 효과에 대한 보고서입니다.", href: "/news/3" },
-    { id: 4, date: "2029.09.01", category: "공지", title: "웹사이트 리뉴얼 관련 시스템 점검 일시 공지", summary: "서비스 안정화를 위한 일시적인 시스템 점검이 예정되어 있습니다. 이용에 불편을 드려 죄송합니다.", href: "/news/4" },
-    { id: 5, date: "2025.08.20", category: "행사", title: "산업 보건 관리자 필수 법규 교육 과정 안내", summary: "산업 보건 관리자 자격 유지를 위한 필수 법규 교육 일정을 확인하십시오.", href: "/news/5" },
-    { id: 6, date: "2025.08.05", category: "연구", title: "근골격계 질환 예방을 위한 작업 환경 분석 보고서", summary: "제조업 기반 사업장의 근골격계 위험 요소 분석 및 개선안을 제시합니다.", href: "/news/6" },
+    { id: 1, date: "2025.10.01", category: "공지", title: "2025년 하반기 안전 점검 의무 사항 안내", summary: "사업장 필수 안전 점검 항목 및 기한을 확인하십시오. 미이행 시 법적 처벌을 받을 수 있습니다.", href: "/notice/1" },
+    { id: 2, date: "2025.09.25", category: "행사", title: "제15차 환경 보건 안전 전문가 포럼 개최", summary: "최신 EHS 동향 및 성공 사례 공유를 위한 전문가 포럼에 초대합니다.", href: "/notice/2" },
+    { id: 3, date: "2025.09.15", category: "연구", title: "화학물질 관리 선진화 방안 연구 논문 발표", summary: "당사 연구진이 발표한 신규 화학물질 관리 시스템 도입 효과에 대한 보고서입니다.", href: "/notice/3" },
+    { id: 4, date: "2029.09.01", category: "공지", title: "웹사이트 리뉴얼 관련 시스템 점검 일시 공지", summary: "서비스 안정화를 위한 일시적인 시스템 점검이 예정되어 있습니다. 이용에 불편을 드려 죄송합니다.", href: "/notice/4" },
+    { id: 5, date: "2025.08.20", category: "행사", title: "산업 보건 관리자 필수 법규 교육 과정 안내", summary: "산업 보건 관리자 자격 유지를 위한 필수 법규 교육 일정을 확인하십시오.", href: "/notice/5" },
+    { id: 6, date: "2025.08.05", category: "연구", title: "근골격계 질환 예방을 위한 작업 환경 분석 보고서", summary: "제조업 기반 사업장의 근골격계 위험 요소 분석 및 개선안을 제시합니다.", href: "/notice/6" },
 ];
+
 
 /**
  * @component Breadcrumbs: 서브 페이지 경로 표시
