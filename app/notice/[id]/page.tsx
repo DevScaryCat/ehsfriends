@@ -1,7 +1,9 @@
 // app/notice/[id]/page.tsx
-import { ChevronRight, Home, Calendar } from 'lucide-react';
+import { ChevronRight, Home, Calendar, Paperclip } from 'lucide-react';
+import Image from 'next/image';
 import { Header, Footer, PRIMARY_COLOR } from '../../components/CommonLayout';
 
+// 1. 실제 데이터 구조에 맞게 heroImage와 attachments 타입을 수정합니다.
 interface NoticeDetail {
     id: number;
     title: string;
@@ -9,6 +11,14 @@ interface NoticeDetail {
     date: string;
     author?: string;
     content: any;
+    heroImage?: { // data, attributes 래퍼 제거
+        url: string;
+        alternativeText: string | null;
+    } | null;
+    attachments?: Array<{ // data 래퍼 제거, 바로 배열로
+        name: string;
+        url: string;
+    }>;
 }
 
 function renderContentAsHtml(content: any): string {
@@ -64,17 +74,48 @@ const ArticleHeader = ({ data }: { data: NoticeDetail }) => (
     </div>
 );
 
-// 1. params의 타입을 Promise로 감싸줍니다.
+const AttachmentList = ({ attachments }: { attachments: Array<{ name: string; url: string; }> }) => {
+    if (!attachments || attachments.length === 0) return null;
+    return (
+        <div className="mt-8 pt-6 border-t border-gray-200">
+            <h3 className={`text-lg font-bold text-gray-800 mb-3`}>첨부 파일</h3>
+            <ul className="space-y-2">
+                {attachments.map((file, index) => (
+                    <li key={index} className="flex items-center">
+                        <Paperclip className="w-4 h-4 mr-2 text-gray-500" />
+                        <a href={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${file.url}`} download className="text-gray-700 hover:text-blue-700 underline text-sm" target="_blank" rel="noopener noreferrer">
+                            {file.name}
+                        </a>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+};
+
 export default async function NoticeDetailPage({ params }: { params: Promise<{ id: string }> }) {
-    // 2. await를 사용하여 params에서 실제 id 값을 추출합니다.
     const { id } = await params;
     const notice = await getNoticeById(id);
 
     if (!notice) {
-        return <div>게시글을 찾을 수 없습니다.</div>;
+        return (
+            <div className="font-sans bg-white min-h-screen">
+                <Header />
+                <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+                    <p>게시글을 찾을 수 없습니다.</p>
+                </main>
+                <Footer />
+            </div>
+        );
     }
 
     const htmlContent = renderContentAsHtml(notice.content);
+
+    // 2. attachments 처리 방식을 단순화합니다.
+    const processedAttachments = notice.attachments || [];
+
+    // 3. heroImageUrl 처리 방식을 단순화합니다.
+    const heroImageUrl = notice.heroImage?.url ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${notice.heroImage.url}` : null;
 
     return (
         <div className="font-sans bg-white min-h-screen">
@@ -82,16 +123,20 @@ export default async function NoticeDetailPage({ params }: { params: Promise<{ i
             <Breadcrumbs title={notice.title} />
             <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
                 <ArticleHeader data={notice} />
-                <div
-                    className="prose max-w-none text-base leading-relaxed text-gray-700 pt-6 space-y-4"
-                    dangerouslySetInnerHTML={{ __html: htmlContent }}
-                />
+
+                {heroImageUrl && (
+                    <div className="w-full my-6 p-1 border border-gray-300 bg-gray-50">
+                        <Image src={heroImageUrl} alt={notice.heroImage?.alternativeText || notice.title} width={1200} height={500} layout="responsive" objectFit="cover" className="w-full h-auto" />
+                    </div>
+                )}
+
+                <div className="prose max-w-none text-base leading-relaxed text-gray-700 pt-6 space-y-4" dangerouslySetInnerHTML={{ __html: htmlContent }} />
+
+                <AttachmentList attachments={processedAttachments} />
+
                 <hr className="border-gray-200 mt-12 mb-8" />
-                <div className="flex justify-between items-center">
-                    <a href="/contact" className={`inline-block px-4 py-2 text-base font-bold bg-${PRIMARY_COLOR} text-white hover:bg-blue-700 transition`}>
-                        상담 요청하기
-                    </a>
-                </div>
+
+                {/* 4. 요청하신 대로 '상담 요청하기' 버튼을 삭제했습니다. */}
             </main>
             <Footer />
         </div>
