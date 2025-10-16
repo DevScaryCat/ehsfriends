@@ -3,7 +3,6 @@ import { ChevronRight, Home, Calendar, Paperclip } from 'lucide-react';
 import Image from 'next/image';
 import { Header, Footer, PRIMARY_COLOR } from '../../components/CommonLayout';
 
-// 1. 실제 데이터 구조에 맞게 heroImage와 attachments 타입을 수정합니다.
 interface NoticeDetail {
     id: number;
     title: string;
@@ -11,11 +10,11 @@ interface NoticeDetail {
     date: string;
     author?: string;
     content: any;
-    heroImage?: { // data, attributes 래퍼 제거
+    heroImage?: {
         url: string;
         alternativeText: string | null;
     } | null;
-    attachments?: Array<{ // data 래퍼 제거, 바로 배열로
+    attachments?: Array<{
         name: string;
         url: string;
     }>;
@@ -83,7 +82,8 @@ const AttachmentList = ({ attachments }: { attachments: Array<{ name: string; ur
                 {attachments.map((file, index) => (
                     <li key={index} className="flex items-center">
                         <Paperclip className="w-4 h-4 mr-2 text-gray-500" />
-                        <a href={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${file.url}`} download className="text-gray-700 hover:text-blue-700 underline text-sm" target="_blank" rel="noopener noreferrer">
+                        {/* Strapi가 전체 주소를 주므로 그대로 사용합니다. */}
+                        <a href={file.url} download className="text-gray-700 hover:text-blue-700 underline text-sm" target="_blank" rel="noopener noreferrer">
                             {file.name}
                         </a>
                     </li>
@@ -110,12 +110,10 @@ export default async function NoticeDetailPage({ params }: { params: Promise<{ i
     }
 
     const htmlContent = renderContentAsHtml(notice.content);
-
-    // 2. attachments 처리 방식을 단순화합니다.
     const processedAttachments = notice.attachments || [];
 
-    // 3. heroImageUrl 처리 방식을 단순화합니다.
-    const heroImageUrl = notice.heroImage?.url ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${notice.heroImage.url}` : null;
+    // Strapi가 전체 주소를 주므로 그대로 사용합니다.
+    const heroImageUrl = notice.heroImage?.url || null;
 
     return (
         <div className="font-sans bg-white min-h-screen">
@@ -135,8 +133,6 @@ export default async function NoticeDetailPage({ params }: { params: Promise<{ i
                 <AttachmentList attachments={processedAttachments} />
 
                 <hr className="border-gray-200 mt-12 mb-8" />
-
-                {/* 4. 요청하신 대로 '상담 요청하기' 버튼을 삭제했습니다. */}
             </main>
             <Footer />
         </div>

@@ -16,9 +16,9 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "lovable-confidence-6c0e975848.strapiapp.com",
+        hostname: "lovable-confidence-6c0e975848.media.strapiapp.com",
         port: "",
-        pathname: "/uploads/**",
+        pathname: "/**", // 모든 경로 허용
       },
     ],
   },
