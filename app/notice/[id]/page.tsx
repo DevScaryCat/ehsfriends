@@ -3,6 +3,7 @@ import { ChevronRight, Home, Calendar, Paperclip } from 'lucide-react';
 import Image from 'next/image';
 import { Header, Footer, PRIMARY_COLOR } from '../../components/CommonLayout';
 
+// --- 인터페이스, 데이터 Fetching, 컴포넌트들 (이전과 동일) ---
 interface NoticeDetail {
     id: number;
     title: string;
@@ -82,7 +83,6 @@ const AttachmentList = ({ attachments }: { attachments: Array<{ name: string; ur
                 {attachments.map((file, index) => (
                     <li key={index} className="flex items-center">
                         <Paperclip className="w-4 h-4 mr-2 text-gray-500" />
-                        {/* Strapi가 전체 주소를 주므로 그대로 사용합니다. */}
                         <a href={file.url} download className="text-gray-700 hover:text-blue-700 underline text-sm" target="_blank" rel="noopener noreferrer">
                             {file.name}
                         </a>
@@ -99,9 +99,9 @@ export default async function NoticeDetailPage({ params }: { params: Promise<{ i
 
     if (!notice) {
         return (
-            <div className="font-sans bg-white min-h-screen">
+            <div className="font-sans bg-white min-h-screen flex flex-col">
                 <Header />
-                <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+                <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-1">
                     <p>게시글을 찾을 수 없습니다.</p>
                 </main>
                 <Footer />
@@ -111,15 +111,14 @@ export default async function NoticeDetailPage({ params }: { params: Promise<{ i
 
     const htmlContent = renderContentAsHtml(notice.content);
     const processedAttachments = notice.attachments || [];
-
-    // Strapi가 전체 주소를 주므로 그대로 사용합니다.
     const heroImageUrl = notice.heroImage?.url || null;
 
     return (
-        <div className="font-sans bg-white min-h-screen">
+        // 1. 최상위 div에 `flex`와 `flex-col`을 추가하여 Flexbox 컨테이너로 만듭니다.
+        <div className="font-sans bg-white min-h-screen flex flex-col">
             <Header />
-            <Breadcrumbs title={notice.title} />
-            <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            {/* 2. `<main>` 태그에 `flex-1`을 추가하여 남은 공간을 모두 차지하도록 합니다. */}
+            <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-1 w-full">
                 <ArticleHeader data={notice} />
 
                 {heroImageUrl && (

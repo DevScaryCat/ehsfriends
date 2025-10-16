@@ -12,13 +12,9 @@ const PageHero = () => {
     return (
         <div
             className="relative w-full h-64 md:h-80 bg-gray-300 flex items-center"
-            style={{ backgroundImage: 'url(https://picsum.photos/id/10/1600/500)', backgroundSize: 'cover', backgroundPosition: 'center' }}
+            style={{ backgroundImage: 'url(https://picsum.photos/id/23/1600/500)', backgroundSize: 'cover', backgroundPosition: 'center' }}
         >
             <div className="absolute inset-0 bg-black opacity-30"></div>
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-                <h1 className="text-4xl md:text-5xl font-extrabold text-white font-sans">EHS 컨설팅 서비스</h1>
-                <p className="mt-2 text-xl text-gray-200 hidden sm:block">환경, 보건, 안전 솔루션</p>
-            </div>
         </div>
     );
 };
