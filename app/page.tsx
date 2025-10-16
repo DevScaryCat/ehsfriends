@@ -6,12 +6,12 @@ import { Header, Footer, PRIMARY_COLOR, FOOTER_BG } from './components/CommonLay
  * @component StatBox: Hero Section 오른쪽 통계 박스
  */
 const StatBox = ({ count, label, icon: Icon }: { count: string; label: string; icon: React.ElementType }) => (
-  <div className={`p-4 text-center bg-white shadow-md border-b-4 border-${PRIMARY_COLOR} flex items-center`}>
-    <div className={`p-3 mr-4 bg-${PRIMARY_COLOR}/10 rounded-full`}>
-      <Icon className={`h-6 w-6 text-${PRIMARY_COLOR}`} />
+  <div className={`p-4 text-center bg-white shadow-md border-b-4 border-slate-700 flex items-center`}>
+    <div className={`p-3 mr-4 bg-slate-700/10 rounded-full`}>
+      <Icon className={`h-6 w-6 text-slate-700`} />
     </div>
     <div>
-      <p className={`text-2xl text-left font-bold text-${PRIMARY_COLOR}`}>{count}</p>
+      <p className={`text-2xl text-left font-bold text-slate-700`}>{count}</p>
       <p className="text-sm text-gray-600 font-semibold">{label}</p>
     </div>
   </div>
@@ -87,9 +87,9 @@ const ConsultingItem = ({ title, description, href, imageUrl }: { title: string;
  */
 const ContentBlock = ({ title, children }: { title: string; children: React.ReactNode }) => (
   <div className="border border-gray-300 p-6 shadow-sm">
-    <h2 className={`text-xl font-bold border-b-2 border-${PRIMARY_COLOR}/50 pb-2 mb-4 text-${PRIMARY_COLOR}`}>
+    <h2 className={`text-xl font-bold border-b-2 border-slate-700/50 pb-2 mb-4 text-slate-700`}>
       {title}
-      <a href="#" className={`float-right text-sm font-normal text-gray-500 hover:text-${PRIMARY_COLOR}`}>+ 더보기</a>
+      <a href="#" className={`float-right text-sm font-normal text-gray-500 hover:text-slate-700`}>+ 더보기</a>
     </h2>
     {children}
   </div>
@@ -139,19 +139,19 @@ export default function EHSPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
             <ContentBlock title="공지사항">
               <ul className="space-y-2 text-sm text-gray-700">
-                <li><a href="/detail/1" className={`hover:text-${PRIMARY_COLOR} block truncate py-1`}>중요] 2025년 하반기 안전 점검 의무 사항 안내</a></li>
-                <li><a href="/detail/2" className={`hover:text-${PRIMARY_COLOR} block truncate py-1`}>웹사이트 리뉴얼 관련 시스템 점검 일시 공지</a></li>
-                <li><a href="/detail/3" className={`hover:text-${PRIMARY_COLOR} block truncate py-1`}>2026년 환경보건안전 전문가 포럼 개최</a></li>
-                <li><a href="/detail/4" className={`hover:text-${PRIMARY_COLOR} block truncate py-1`}>자료실 개편에 따른 일부 서비스 일시 중단</a></li>
+                <li><a href="/detail/1" className={`hover:text-slate-700 block truncate py-1`}>중요] 2025년 하반기 안전 점검 의무 사항 안내</a></li>
+                <li><a href="/detail/2" className={`hover:text-slate-700 block truncate py-1`}>웹사이트 리뉴얼 관련 시스템 점검 일시 공지</a></li>
+                <li><a href="/detail/3" className={`hover:text-slate-700 block truncate py-1`}>2026년 환경보건안전 전문가 포럼 개최</a></li>
+                <li><a href="/detail/4" className={`hover:text-slate-700 block truncate py-1`}>자료실 개편에 따른 일부 서비스 일시 중단</a></li>
               </ul>
             </ContentBlock>
 
             <ContentBlock title="자료실">
               <ul className="space-y-2 text-sm text-gray-700">
-                <li><a href="/detail/9" className={`hover:text-${PRIMARY_COLOR} block truncate py-1`}>2025 EHS 법규 해설집 (PDF)</a></li>
-                <li><a href="/detail/10" className={`hover:text-${PRIMARY_COLOR} block truncate py-1`}>안전보건 관리 매뉴얼 개정판</a></li>
-                <li><a href="/detail/11" className={`hover:text-${PRIMARY_COLOR} block truncate py-1`}>주요 환경 분석 보고서 요약</a></li>
-                <li><a href="/detail/12" className={`hover:text-${PRIMARY_COLOR} block truncate py-1`}>산업안전보건 기준에 관한 규칙</a></li>
+                <li><a href="/detail/9" className={`hover:text-slate-700 block truncate py-1`}>2025 EHS 법규 해설집 (PDF)</a></li>
+                <li><a href="/detail/10" className={`hover:text-slate-700 block truncate py-1`}>안전보건 관리 매뉴얼 개정판</a></li>
+                <li><a href="/detail/11" className={`hover:text-slate-700 block truncate py-1`}>주요 환경 분석 보고서 요약</a></li>
+                <li><a href="/detail/12" className={`hover:text-slate-700 block truncate py-1`}>산업안전보건 기준에 관한 규칙</a></li>
               </ul>
             </ContentBlock>
           </div>

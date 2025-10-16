@@ -11,7 +11,7 @@ const Breadcrumbs = () => (
         <ol className="flex items-center space-x-2">
             <li><a href="/" className="hover:text-blue-700"><Home className="w-4 h-4 inline-block text-gray-400" /></a></li>
             <ChevronRight className="w-4 h-4" />
-            <li className={`text-${PRIMARY_COLOR} font-bold`}>알림소식</li>
+            <li className={`text-slate-700 font-bold`}>알림소식</li>
         </ol>
     </nav>
 );

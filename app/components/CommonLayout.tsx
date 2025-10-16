@@ -2,7 +2,7 @@
 import { Search, Home, ChevronRight } from 'lucide-react';
 
 // 공통 상수
-export const PRIMARY_COLOR = 'slate-800'; // 남색 (#1e40af)
+export const PRIMARY_COLOR = 'slate-700'; // 남색 (#1e40af)
 export const FOOTER_BG = 'slate-900'; // 푸터 배경색: 검정 계열
 
 /**
@@ -13,7 +13,7 @@ const SubMenuItem = ({ title, href }: { title: string; href: string }) => (
         <a
             href={href}
             // w-max 클래스를 사용하여 텍스트 길이에 맞춰 드롭다운 너비 자동 조정
-            className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-${PRIMARY_COLOR} transition duration-150 ease-in-out whitespace-nowrap`}
+            className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-slate-700 transition duration-150 ease-in-out whitespace-nowrap`}
         >
             {title}
         </a>
@@ -27,7 +27,7 @@ const NavItem = ({ title, href, subMenus }: { title: string; href: string; subMe
     const isDropdown = subMenus && subMenus.length > 0;
 
     // 상위 메뉴 링크 스타일
-    const linkClasses = `block py-2 text-gray-700 font-semibold md:text-lg border-b-2 border-transparent hover:border-${PRIMARY_COLOR} hover:text-${PRIMARY_COLOR} transition duration-150 ease-in-out`;
+    const linkClasses = `block py-2 text-gray-700 font-semibold md:text-lg border-b-2 border-transparent hover:border-slate-700 hover:text-slate-700 transition duration-150 ease-in-out`;
 
     return (
         // group 클래스를 사용하여 group-hover로 드롭다운 표시 (PC 환경)
@@ -83,10 +83,10 @@ export const Header = () => {
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* 상단 유틸리티 및 검색 영역 */}
                 <div className="flex justify-end items-center py-2 text-sm text-gray-600 border-b border-gray-100">
-                    <a href="#" className={`hover:text-${PRIMARY_COLOR} transition duration-150 ease-in-out px-3`}>
+                    <a href="#" className={`hover:text-slate-700 transition duration-150 ease-in-out px-3`}>
                         로그인
                     </a>
-                    <a href="#" className={`hover:text-${PRIMARY_COLOR} transition duration-150 ease-in-out px-3 border-l border-gray-300`}>
+                    <a href="#" className={`hover:text-slate-700 transition duration-150 ease-in-out px-3 border-l border-gray-300`}>
                         사이트맵
                     </a>
                     <div className="relative ml-4 hidden sm:block">
@@ -101,7 +101,7 @@ export const Header = () => {
 
                 {/* 로고 및 주 메뉴 영역 (반응형) */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center py-6">
-                    <a href='/' className={`text-3xl font-bold text-${PRIMARY_COLOR} mb-4 md:mb-0 font-sans`}>
+                    <a href='/' className={`text-3xl font-bold text-slate-700 mb-4 md:mb-0 font-sans`}>
                         EHS Friends
                     </a>
                     {/* 메인 네비게이션 리스트 */}

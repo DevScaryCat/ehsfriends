@@ -55,7 +55,7 @@ const Breadcrumbs = ({ title }: { title: string }) => (
             <ChevronRight className="w-4 h-4" />
             <li><a href="/notice" className="hover:text-blue-700 font-semibold">알림소식</a></li>
             <ChevronRight className="w-4 h-4" />
-            <li className={`text-${PRIMARY_COLOR} font-bold`}>{title}</li>
+            <li className={`text-slate-700 font-bold`}>{title}</li>
         </ol>
     </nav>
 );
@@ -64,7 +64,7 @@ const ArticleHeader = ({ data }: { data: NoticeDetail }) => (
     <div className="space-y-2 pb-4 border-b border-gray-300">
         <h1 className="text-3xl md:text-4xl font-extrabold text-gray-800 tracking-tight">{data.title}</h1>
         <div className="flex flex-wrap items-center text-sm text-gray-600 pt-1">
-            <span className={`font-semibold text-${PRIMARY_COLOR} mr-3`}>{data.category}</span>
+            <span className={`font-semibold text-slate-700 mr-3`}>{data.category}</span>
             <span className="flex items-center mr-3 border-l border-gray-300 pl-3">
                 <Calendar className="w-4 h-4 mr-1" /> {data.date}
             </span>

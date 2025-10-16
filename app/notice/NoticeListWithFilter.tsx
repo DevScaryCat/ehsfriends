@@ -35,7 +35,7 @@ async function getNotices(category?: string | null) {
 const NoticeItemCard = ({ notice }: { notice: Notice }) => (
     <a href={`/notice/${notice.documentId}`} className="block p-4 sm:p-6 border-b border-gray-200 hover:bg-gray-50 transition">
         <div className="flex items-center space-x-3 text-sm font-semibold">
-            <span className={`text-${PRIMARY_COLOR} border border-${PRIMARY_COLOR}/50 px-2 py-0.5 rounded-full text-xs`}>{notice.category || '미분류'}</span>
+            <span className={`text-slate-700 border border-slate-700/50 px-2 py-0.5 rounded-full text-xs`}>{notice.category || '미분류'}</span>
             <span className="flex items-center text-gray-500"><Calendar className="w-4 h-4 mr-1" />{notice.date}</span>
         </div>
         <h3 className="text-xl font-bold text-gray-800 group-hover:text-blue-700">{notice.title}</h3>
@@ -46,7 +46,7 @@ const NoticeItemCard = ({ notice }: { notice: Notice }) => (
 const Pagination = () => (
     <div className="flex justify-center mt-10 space-x-1">
         <button className="px-3 py-1 text-gray-500 border border-gray-300 rounded hover:bg-gray-100">&lt; 이전</button>
-        <button className={`px-3 py-1 font-bold text-white bg-${PRIMARY_COLOR} border border-${PRIMARY_COLOR} rounded`}>1</button>
+        <button className={`px-3 py-1 font-bold text-white bg-slate-700 border border-slate-700 rounded`}>1</button>
         <button className="px-3 py-1 text-gray-700 border border-gray-300 rounded hover:bg-gray-100">2</button>
         <button className="px-3 py-1 text-gray-500 border border-gray-300 rounded hover:bg-gray-100">다음 &gt;</button>
     </div>
@@ -80,7 +80,7 @@ export default function NoticeListWithFilter() {
                     <select
                         onChange={handleFilterChange}
                         value={currentCategory || ''}
-                        className={`p-1 border border-gray-300 rounded text-sm focus:border-${PRIMARY_COLOR} focus:ring-${PRIMARY_COLOR}`}
+                        className={`p-1 border border-gray-300 rounded text-sm focus:border-slate-700 focus:ring-slate-700`}
                     >
                         <option value="">전체</option>
                         <option value="공지">공지</option>

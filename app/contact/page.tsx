@@ -19,7 +19,7 @@ const Breadcrumbs = () => (
         <ol className="flex items-center space-x-2">
             <li><a href="/" className="hover:text-blue-700"><Home className="w-4 h-4 inline-block text-gray-400" /></a></li>
             <ChevronRight className="w-4 h-4" />
-            <li className={`text-${PRIMARY_COLOR} font-bold`}>상담신청</li>
+            <li className={`text-slate-700 font-bold`}>상담신청</li>
         </ol>
     </nav>
 );
@@ -70,32 +70,32 @@ export default function ContactPage() {
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div>
                             <label htmlFor="service" className="block text-base font-bold text-gray-800 mb-2">상담 분야<span className="text-red-500 ml-1">*</span></label>
-                            <select id="service" name="service" required className={`w-full p-3 border border-gray-300 rounded-md focus:border-${PRIMARY_COLOR} focus:ring-${PRIMARY_COLOR} text-gray-700 transition`}>
+                            <select id="service" name="service" required className={`w-full p-3 border border-gray-300 rounded-md focus:border-slate-700 focus:ring-slate-700 text-gray-700 transition`}>
                                 <option value="">--- 서비스 선택 ---</option>
                                 {serviceItems.map(item => (<option key={item.value} value={item.value}>{item.label}</option>))}
                             </select>
                         </div>
                         <div>
                             <label htmlFor="name" className="block text-base font-bold text-gray-800 mb-2">성함<span className="text-red-500 ml-1">*</span></label>
-                            <input type="text" id="name" name="name" required className={`w-full p-3 border border-gray-300 rounded-md focus:border-${PRIMARY_COLOR} focus:ring-${PRIMARY_COLOR} text-gray-700 transition`} />
+                            <input type="text" id="name" name="name" required className={`w-full p-3 border border-gray-300 rounded-md focus:border-slate-700 focus:ring-slate-700 text-gray-700 transition`} />
                         </div>
                         <div>
                             <label htmlFor="company" className="block text-base font-bold text-gray-800 mb-2">회사명<span className="text-red-500 ml-1">*</span></label>
-                            <input type="text" id="company" name="company" required className={`w-full p-3 border border-gray-300 rounded-md focus:border-${PRIMARY_COLOR} focus:ring-${PRIMARY_COLOR} text-gray-700 transition`} />
+                            <input type="text" id="company" name="company" required className={`w-full p-3 border border-gray-300 rounded-md focus:border-slate-700 focus:ring-slate-700 text-gray-700 transition`} />
                         </div>
                         <div>
                             <label htmlFor="phone" className="block text-base font-bold text-gray-800 mb-2">연락처<span className="text-red-500 ml-1">*</span></label>
-                            <input type="tel" id="phone" name="phone" required className={`w-full p-3 border border-gray-300 rounded-md focus:border-${PRIMARY_COLOR} focus:ring-${PRIMARY_COLOR} text-gray-700 transition`} />
+                            <input type="tel" id="phone" name="phone" required className={`w-full p-3 border border-gray-300 rounded-md focus:border-slate-700 focus:ring-slate-700 text-gray-700 transition`} />
                         </div>
                         <div>
                             <label htmlFor="email" className="block text-base font-bold text-gray-800 mb-2">이메일<span className="text-red-500 ml-1">*</span></label>
-                            <input type="email" id="email" name="email" required className={`w-full p-3 border border-gray-300 rounded-md focus:border-${PRIMARY_COLOR} focus:ring-${PRIMARY_COLOR} text-gray-700 transition`} />
+                            <input type="email" id="email" name="email" required className={`w-full p-3 border border-gray-300 rounded-md focus:border-slate-700 focus:ring-slate-700 text-gray-700 transition`} />
                         </div>
                         <div>
                             <label htmlFor="message" className="block text-base font-bold text-gray-800 mb-2">문의 내용</label>
-                            <textarea id="message" name="message" rows={5} className={`w-full p-3 border border-gray-300 rounded-md focus:border-${PRIMARY_COLOR} focus:ring-${PRIMARY_COLOR} text-gray-700 transition`} />
+                            <textarea id="message" name="message" rows={5} className={`w-full p-3 border border-gray-300 rounded-md focus:border-slate-700 focus:ring-slate-700 text-gray-700 transition`} />
                         </div>
-                        <button type="submit" disabled={isSubmitting} className={`w-full flex items-center justify-center p-3 text-lg font-bold bg-${PRIMARY_COLOR} text-white rounded-md hover:bg-blue-700 transition disabled:bg-gray-400 disabled:cursor-not-allowed`}>
+                        <button type="submit" disabled={isSubmitting} className={`w-full flex items-center justify-center p-3 text-lg font-bold bg-slate-700 text-white rounded-md hover:bg-blue-700 transition disabled:bg-gray-400 disabled:cursor-not-allowed`}>
                             <Send className="w-5 h-5 mr-2" /> {isSubmitting ? '전송 중...' : '상담 신청하기'}
                         </button>
                     </form>

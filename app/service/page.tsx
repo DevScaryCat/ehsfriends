@@ -23,7 +23,7 @@ const Breadcrumbs = () => {
             <ol className="flex items-center space-x-2">
                 <li><a href="/" className="hover:text-blue-700"><Home className="w-4 h-4 inline-block text-gray-400" /></a></li>
                 <ChevronRight className="w-4 h-4" />
-                <li className={`text-${PRIMARY_COLOR} font-bold`}>서비스</li>
+                <li className={`text-slate-700 font-bold`}>서비스</li>
             </ol>
         </nav>
     );
@@ -40,7 +40,7 @@ const ServiceTile = ({ title, href, icon: Icon, color, description }: typeof ser
         <div className="flex justify-center items-center">
             <Icon className={`h-8 w-8 text-${color}`} />
         </div>
-        <h3 className={`text-lg font-bold text-${PRIMARY_COLOR}`}>{title}</h3>
+        <h3 className={`text-lg font-bold text-slate-700`}>{title}</h3>
         <p className="text-sm text-gray-600">{description}</p>
     </a>
 );
@@ -71,7 +71,7 @@ export default function ServiceHubPage() {
 
                 {/* 2. 주요 서비스 타일 영역 (HSS Vendor Management 스타일) */}
                 <div className="space-y-8">
-                    <h2 className={`text-2xl font-bold text-${PRIMARY_COLOR}`}>서비스 항목 선택</h2>
+                    <h2 className={`text-2xl font-bold text-slate-700`}>서비스 항목 선택</h2>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         {serviceItems.map((item, index) => (
@@ -81,7 +81,7 @@ export default function ServiceHubPage() {
                 </div>
 
                 {/* 3. 추가 CTA 블록 */}
-                <section className={`mt-12 p-8 text-center bg-${PRIMARY_COLOR} text-white`}>
+                <section className={`mt-12 p-8 text-center bg-slate-700 text-white`}>
                     <h3 className="text-2xl font-bold mb-2">무엇을 도와드릴까요?</h3>
                     <p className="text-lg mb-4">어떤 컨설팅이 필요한지 잘 모르겠다면, 전문가에게 문의하세요.</p>
                     <a

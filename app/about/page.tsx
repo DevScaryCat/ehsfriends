@@ -13,7 +13,7 @@ const Breadcrumbs = () => {
             <ol className="flex items-center space-x-2">
                 <li><a href="/" className="hover:text-blue-700"><Home className="w-4 h-4 inline-block text-gray-400" /></a></li>
                 <ChevronRight className="w-4 h-4" />
-                <li className={`text-${PRIMARY_COLOR} font-bold`}>회사 소개</li>
+                <li className={`text-slate-700 font-bold`}>회사 소개</li>
             </ol>
         </nav>
     );
@@ -97,7 +97,7 @@ export default function AboutPage() {
 
     const leadershipContent = (
         <div className="space-y-4">
-            <h4 className={`text-xl font-bold text-${PRIMARY_COLOR}`}>㈜EHS프렌즈 대표이사</h4>
+            <h4 className={`text-xl font-bold text-slate-700`}>㈜EHS프렌즈 대표이사</h4>
             <ul className="list-disc list-inside space-y-1 pl-4 text-gray-700">
                 <li>한국산업보건학회 재무이사</li>
                 <li>산업위생기술사, 산업보건지도사 자격 보유</li>
@@ -137,11 +137,11 @@ export default function AboutPage() {
                         {/* CTA 박스 (W-1/4) */}
                         <div className="w-full md:w-1/4 mt-2 md:mt-0">
                             <div className={`p-4 border border-gray-300 bg-gray-50 shadow-md`}>
-                                <h3 className={`text-xl font-bold mb-3 text-${PRIMARY_COLOR}`}>상담 문의</h3>
+                                <h3 className={`text-xl font-bold mb-3 text-slate-700`}>상담 문의</h3>
                                 <p className="text-sm text-gray-600 mb-4">
                                     EHS 전문가와 지금 바로 상담을 시작하세요.
                                 </p>
-                                <button className={`w-full py-2 bg-${PRIMARY_COLOR} text-white font-semibold hover:bg-blue-700 transition`}>
+                                <button className={`w-full py-2 bg-slate-700 text-white font-semibold hover:bg-blue-700 transition`}>
                                     상담 요청하기
                                 </button>
                             </div>
