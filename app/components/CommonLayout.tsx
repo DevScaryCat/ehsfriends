@@ -2,7 +2,7 @@
 import { Search, Home, ChevronRight } from 'lucide-react';
 
 // 공통 상수
-export const PRIMARY_COLOR = 'slate-700'; // 남색 (#1e40af)
+export const PRIMARY_COLOR = 'slate-800'; // 남색 (#1e40af)
 export const FOOTER_BG = 'slate-900'; // 푸터 배경색: 검정 계열
 
 /**
