@@ -31,17 +31,31 @@ async function getRecentNoticesByCategory(category: '공지' | '자료실', limi
 
 // --- HeroSection 컴포넌트 수정 ---
 const HeroSection = () => {
-  // StatBox 컴포넌트는 AnimatedStats 내부로 이동했으므로 여기서는 제거합니다.
-  // stats 데이터도 AnimatedStats 내부로 이동했습니다.
+  const videoUrl = "https://res.cloudinary.com/doyzaetry/video/upload/v1760662732/ehs_rj460p.mp4";
+
   return (
     <div className={`bg-gray-100 border-b border-gray-300`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16 flex flex-col md:flex-row items-center">
+        {/* 슬라이드 쇼 영역을 비디오로 교체 */}
         <div className="w-full md:w-2/3 md:pr-10 mb-8 md:mb-0">
-          <div className="h-64 md:h-96 bg-gray-300 flex items-center justify-center text-xl text-gray-700 border border-gray-400">
-            [슬라이드 쇼] EHS 분야별 주요 사진 및 메시지
+          {/* 비디오 컨테이너: 높이 유지 및 overflow hidden */}
+          <div className="relative h-64 md:h-96 w-full overflow-hidden bg-black border border-gray-400">
+            <video
+              src={videoUrl}
+              autoPlay
+              muted
+              loop
+              playsInline
+              // 비디오가 컨테이너를 채우도록 스타일링
+              className="absolute top-0 left-0 w-full h-full object-cover"
+            >
+              Your browser does not support the video tag.
+            </video>
+            {/* 비디오 위에 어두운 오버레이 추가 (선택 사항) */}
+            {/* <div className="absolute inset-0 bg-black/30"></div> */}
           </div>
         </div>
-        {/* 통계 박스 영역을 AnimatedStats 컴포넌트로 교체합니다. */}
+        {/* 통계 박스 영역 */}
         <AnimatedStats />
       </div>
     </div>
