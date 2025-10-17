@@ -34,25 +34,20 @@ const HeroSection = () => {
   const videoUrl = "https://res.cloudinary.com/doyzaetry/video/upload/v1760662732/ehs_rj460p.mp4";
 
   return (
-    <div className={`bg-gray-100 border-b border-gray-300`}>
+    <div>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16 flex flex-col md:flex-row items-center">
-        {/* 슬라이드 쇼 영역을 비디오로 교체 */}
         <div className="w-full md:w-2/3 md:pr-10 mb-8 md:mb-0">
-          {/* 비디오 컨테이너: 높이 유지 및 overflow hidden */}
-          <div className="relative h-64 md:h-96 w-full overflow-hidden bg-black border border-gray-400">
+          <div className="relative h-64 md:h-96 w-full overflow-hidden bg-black">
             <video
               src={videoUrl}
               autoPlay
               muted
               loop
               playsInline
-              // 비디오가 컨테이너를 채우도록 스타일링
               className="absolute top-0 left-0 w-full h-full object-cover"
             >
               Your browser does not support the video tag.
             </video>
-            {/* 비디오 위에 어두운 오버레이 추가 (선택 사항) */}
-            {/* <div className="absolute inset-0 bg-black/30"></div> */}
           </div>
         </div>
         {/* 통계 박스 영역 */}

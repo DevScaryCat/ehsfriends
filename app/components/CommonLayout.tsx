@@ -4,6 +4,7 @@
 import { useState } from 'react';
 import { Search } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image'; // Next.js Image 컴포넌트 임포트
 import SearchModal from './SearchModal'; // 검색 모달 컴포넌트를 임포트합니다.
 
 // 공통 상수
@@ -94,8 +95,15 @@ export const Header = () => {
                     </div>
 
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center py-6">
-                        <Link href='/' className={`text-3xl font-bold text-slate-700 mb-4 md:mb-0 font-sans`}>
-                            EHS Friends
+                        {/* 텍스트 로고를 Image 컴포넌트로 교체 */}
+                        <Link href='/' className="mb-4 md:mb-0 block">
+                            <Image
+                                src="/logo.png" // public 폴더의 로고 경로
+                                alt="EHS Friends 로고"
+                                width={190} // 로고 이미지의 실제 가로 크기 또는 원하는 크기
+                                height={45} // 로고 이미지의 실제 세로 크기 또는 원하는 크기
+                                priority // LCP(Largest Contentful Paint) 개선을 위해 로고는 우선 로드
+                            />
                         </Link>
                         <nav className="w-full md:w-auto">
                             <ul className="flex flex-wrap md:flex-nowrap space-x-4 md:space-x-8 items-center text-sm md:text-lg font-semibold text-gray-700">
