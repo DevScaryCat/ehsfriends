@@ -1,22 +1,26 @@
-// components/CommonLayout.tsx
-import { Search, Home, ChevronRight } from 'lucide-react';
+// app/components/CommonLayout.tsx
+"use client"; // useState를 사용하므로 클라이언트 컴포넌트로 전환합니다.
+
+import { useState } from 'react';
+import { Search } from 'lucide-react';
+import Link from 'next/link';
+import SearchModal from './SearchModal'; // 검색 모달 컴포넌트를 임포트합니다.
 
 // 공통 상수
-export const PRIMARY_COLOR = 'slate-700'; // 남색 (#1e40af)
-export const FOOTER_BG = 'slate-900'; // 푸터 배경색: 검정 계열
+export const PRIMARY_COLOR = 'slate-700';
+export const FOOTER_BG = 'slate-900';
 
 /**
  * @component SubMenuItem: 드롭다운 하위 메뉴 아이템
  */
 const SubMenuItem = ({ title, href }: { title: string; href: string }) => (
     <li>
-        <a
+        <Link
             href={href}
-            // w-max 클래스를 사용하여 텍스트 길이에 맞춰 드롭다운 너비 자동 조정
             className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-slate-700 transition duration-150 ease-in-out whitespace-nowrap`}
         >
             {title}
-        </a>
+        </Link>
     </li>
 );
 
@@ -25,22 +29,16 @@ const SubMenuItem = ({ title, href }: { title: string; href: string }) => (
  */
 const NavItem = ({ title, href, subMenus }: { title: string; href: string; subMenus?: { title: string; href: string; }[] }) => {
     const isDropdown = subMenus && subMenus.length > 0;
-
-    // 상위 메뉴 링크 스타일
     const linkClasses = `block py-2 text-gray-700 font-semibold md:text-lg border-b-2 border-transparent hover:border-slate-700 hover:text-slate-700 transition duration-150 ease-in-out`;
 
     return (
-        // group 클래스를 사용하여 group-hover로 드롭다운 표시 (PC 환경)
         <li className={`relative ${isDropdown ? 'group' : ''}`}>
-            {/* 상위 메뉴 링크 */}
-            <a
+            <Link
                 href={href}
                 className={linkClasses}
             >
                 {title}
-            </a>
-
-            {/* 드롭다운 메뉴 (hover 시 표시) */}
+            </Link>
             {isDropdown && (
                 <ul className={`absolute left-0 mt-0 w-max bg-white border border-gray-200 shadow-lg py-1 z-20 hidden group-hover:block`}>
                     {subMenus.map((item, index) => (
@@ -52,13 +50,12 @@ const NavItem = ({ title, href, subMenus }: { title: string; href: string; subMe
     );
 };
 
-
 /**
  * @component Header: 최상단 네비게이션 및 로고 영역 (반응형 적용)
  */
 export const Header = () => {
+    const [isSearchOpen, setIsSearchOpen] = useState(false); // 모달 상태 관리
 
-    // 새로운 네비게이션 구조 정의
     const navItems = [
         { title: "EHS 소개", href: "/about" },
         {
@@ -75,54 +72,48 @@ export const Header = () => {
             ]
         },
         { title: "알림소식", href: "/notice" },
-        // 상담신청은 별도로 버튼 스타일로 처리
     ];
 
     return (
-        <header className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-10">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                {/* 상단 유틸리티 및 검색 영역 */}
-                <div className="flex justify-end items-center py-2 text-sm text-gray-600 border-b border-gray-100">
-                    <a href="#" className={`hover:text-slate-700 transition duration-150 ease-in-out px-3`}>
-                        로그인
-                    </a>
-                    <a href="#" className={`hover:text-slate-700 transition duration-150 ease-in-out px-3 border-l border-gray-300`}>
-                        사이트맵
-                    </a>
-                    <div className="relative ml-4 hidden sm:block">
-                        <input
-                            type="text"
-                            placeholder="통합 검색"
-                            className="pl-2 pr-8 py-1 border border-gray-300 rounded-sm focus:ring-blue-500 focus:border-blue-500 w-32 text-xs"
-                        />
-                        <Search className="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500 cursor-pointer" />
+        <>
+            <header className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-40">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="flex justify-end items-center py-2 text-sm text-gray-600 border-b border-gray-100">
+                        <Link href="#" className={`hover:text-slate-700 transition duration-150 ease-in-out px-3`}>로그인</Link>
+                        <Link href="#" className={`hover:text-slate-700 transition duration-150 ease-in-out px-3 border-l border-gray-300`}>사이트맵</Link>
+
+                        <div className="relative ml-4 hidden sm:block" onClick={() => setIsSearchOpen(true)}>
+                            <input
+                                type="text"
+                                placeholder="통합 검색"
+                                className="pl-2 pr-8 py-1 border border-gray-300 rounded-sm w-32 text-xs cursor-pointer"
+                                readOnly
+                            />
+                            <Search className="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
+                        </div>
+                    </div>
+
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center py-6">
+                        <Link href='/' className={`text-3xl font-bold text-slate-700 mb-4 md:mb-0 font-sans`}>
+                            EHS Friends
+                        </Link>
+                        <nav className="w-full md:w-auto">
+                            <ul className="flex flex-wrap md:flex-nowrap space-x-4 md:space-x-8 items-center text-sm md:text-lg font-semibold text-gray-700">
+                                {navItems.map((item, index) => (
+                                    <NavItem key={index} {...item} />
+                                ))}
+                                <li>
+                                    <Link href="/contact" className={`inline-block px-4 py-2 text-sm md:text-base bg-slate-700 text-white rounded hover:bg-slate-800 transition duration-150 ease-in-out whitespace-nowrap`}>
+                                        상담신청
+                                    </Link>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
-
-                {/* 로고 및 주 메뉴 영역 (반응형) */}
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center py-6">
-                    <a href='/' className={`text-3xl font-bold text-slate-700 mb-4 md:mb-0 font-sans`}>
-                        EHS Friends
-                    </a>
-                    {/* 메인 네비게이션 리스트 */}
-                    <nav className="w-full md:w-auto">
-                        <ul className="flex flex-wrap md:flex-nowrap space-x-4 md:space-x-8 items-center text-sm md:text-lg font-semibold text-gray-700">
-                            {navItems.map((item, index) => (
-                                <NavItem key={index} {...item} />
-                            ))}
-                            <li>
-                                <a
-                                    href="/contact"
-                                    className={`inline-block px-4 py-2 text-sm md:text-base bg-slate-700 text-white rounded hover:bg-slate-800 transition duration-150 ease-in-out whitespace-nowrap`}
-                                >
-                                    상담신청
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </header>
+            </header>
+            <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+        </>
     );
 };
 
@@ -137,23 +128,23 @@ export const Footer = () => {
                     <div>
                         <h4 className="text-lg font-semibold mb-3 text-white">바로가기</h4>
                         <ul className="space-y-2 text-sm">
-                            <li><a href="/about" className="hover:text-gray-300">EHS 소개</a></li>
-                            <li><a href="/faq" className="hover:text-gray-300">자주 묻는 질문</a></li>
-                            <li><a href="/careers" className="hover:text-gray-300">채용 정보</a></li>
+                            <li><Link href="/about" className="hover:text-gray-300">EHS 소개</Link></li>
+                            <li><Link href="/faq" className="hover:text-gray-300">자주 묻는 질문</Link></li>
+                            <li><Link href="/careers" className="hover:text-gray-300">채용 정보</Link></li>
                         </ul>
                     </div>
                     <div>
                         <h4 className="text-lg font-semibold mb-3 text-white">환경 분야</h4>
                         <ul className="space-y-2 text-sm">
-                            <li><a href="#" className="hover:text-gray-300">대기/수질 관리</a></li>
-                            <li><a href="#" className="hover:text-gray-300">폐기물 관리</a></li>
+                            <li><Link href="#" className="hover:text-gray-300">대기/수질 관리</Link></li>
+                            <li><Link href="#" className="hover:text-gray-300">폐기물 관리</Link></li>
                         </ul>
                     </div>
                     <div className="col-span-2 md:col-span-1">
                         <h4 className="text-lg font-semibold mb-3 text-white">보건 및 안전</h4>
                         <ul className="space-y-2 text-sm">
-                            <li><a href="#" className="hover:text-gray-300">산업 위생</a></li>
-                            <li><a href="#" className="hover:text-gray-300">안전 규정</a></li>
+                            <li><Link href="#" className="hover:text-gray-300">산업 위생</Link></li>
+                            <li><Link href="#" className="hover:text-gray-300">안전 규정</Link></li>
                         </ul>
                     </div>
                     <div className="col-span-2 md:col-span-1">

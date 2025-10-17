@@ -1,21 +1,21 @@
 // app/page.tsx
 import { Briefcase, ChevronRight, TrendingUp, Users } from 'lucide-react';
 import { Header, Footer } from './components/CommonLayout';
-import Link from 'next/link'; // Next.js의 Link 컴포넌트 사용
+import Link from 'next/link';
+// 애니메이션 통계 컴포넌트를 임포트합니다.
+import { AnimatedStats } from './components/AnimatedStatsOverlay';
 
-// --- 타입 정의 ---
+// --- 타입 정의 및 데이터 Fetching (이전과 동일) ---
 interface Notice {
   id: number;
   documentId: string;
   title: string;
 }
 
-// --- Strapi 데이터 Fetching 함수 ---
 async function getRecentNoticesByCategory(category: '공지' | '자료실', limit: number = 4) {
-  // 최신순으로 정렬하고, 카테고리별로 필터링하며, 개수를 제한하여 데이터를 가져옵니다.
   const url = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/notices?filters[category][$eq]=${category}&sort=date:desc&pagination[pageSize]=${limit}&pagination[page]=1`;
   try {
-    const res = await fetch(url, { next: { revalidate: 300 } }); // 5분마다 데이터 갱신
+    const res = await fetch(url, { next: { revalidate: 300 } });
     if (!res.ok) {
       console.error(`Failed to fetch ${category}:`, res.statusText);
       return [];
@@ -29,25 +29,10 @@ async function getRecentNoticesByCategory(category: '공지' | '자료실', limi
 }
 
 
-// --- 기존 컴포넌트들 (수정 없음) ---
-const StatBox = ({ count, label, icon: Icon }: { count: string; label: string; icon: React.ElementType }) => (
-  <div className={`p-4 text-center bg-white shadow-md border-b-4 border-slate-700 flex items-center`}>
-    <div className={`p-3 mr-4 bg-slate-700/10 rounded-full`}>
-      <Icon className={`h-6 w-6 text-slate-700`} />
-    </div>
-    <div>
-      <p className={`text-2xl text-left font-bold text-slate-700`}>{count}</p>
-      <p className="text-sm text-gray-600 font-semibold">{label}</p>
-    </div>
-  </div>
-);
-
+// --- HeroSection 컴포넌트 수정 ---
 const HeroSection = () => {
-  const stats = [
-    { count: "5000+", label: "컨설팅 기업수", icon: Users },
-    { count: "10년+", label: "운영 노하우", icon: Briefcase },
-    { count: "1위", label: "서비스 만족도", icon: TrendingUp },
-  ];
+  // StatBox 컴포넌트는 AnimatedStats 내부로 이동했으므로 여기서는 제거합니다.
+  // stats 데이터도 AnimatedStats 내부로 이동했습니다.
   return (
     <div className={`bg-gray-100 border-b border-gray-300`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16 flex flex-col md:flex-row items-center">
@@ -56,16 +41,15 @@ const HeroSection = () => {
             [슬라이드 쇼] EHS 분야별 주요 사진 및 메시지
           </div>
         </div>
-        <div className="w-full md:w-1/3 space-y-4">
-          {stats.map((stat, index) => (
-            <StatBox key={index} {...stat} />
-          ))}
-        </div>
+        {/* 통계 박스 영역을 AnimatedStats 컴포넌트로 교체합니다. */}
+        <AnimatedStats />
       </div>
     </div>
   );
 };
 
+
+// --- 나머지 컴포넌트들 (이전과 동일) ---
 const ConsultingItem = ({ title, description, href, imageUrl }: { title: string; description: string; href: string; imageUrl: string }) => {
   return (
     <a
@@ -99,7 +83,7 @@ const ContentBlock = ({ title, children, moreLink }: { title: string; children: 
 );
 
 
-// --- 메인 페이지 컴포넌트 수정 ---
+// --- 메인 페이지 컴포넌트 (변경 없음) ---
 export default async function EHSPage() {
   const consultingServices = [
     { title: "EHS 컨설팅", desc: "전반적인 EHS 시스템 구축 및 운영 자문", href: "/service/ehs", imageUrl: "https://picsum.photos/id/20/400/300" },
@@ -112,7 +96,6 @@ export default async function EHSPage() {
     { title: "산업보건지도사 컨설팅", desc: "산업보건지도사 자격 기준의 전문 지도 및 컨설팅", href: "/service/health-pro", imageUrl: "https://picsum.photos/id/27/400/300" },
   ];
 
-  // 페이지가 렌더링될 때 서버에서 데이터를 병렬로 가져옵니다.
   const [notices, resources] = await Promise.all([
     getRecentNoticesByCategory('공지', 4),
     getRecentNoticesByCategory('자료실', 4),
