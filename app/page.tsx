@@ -1,11 +1,11 @@
 // app/page.tsx
-import { Briefcase, ChevronRight, TrendingUp, Users } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import { Header, Footer } from './components/CommonLayout';
 import Link from 'next/link';
-// 애니메이션 통계 컴포넌트를 임포트합니다.
-import { AnimatedStats } from './components/AnimatedStatsOverlay';
+// 히어로 섹션 컴포넌트를 임포트합니다.
+import { HeroSection } from './components/HeroSection';
 
-// --- 타입 정의 및 데이터 Fetching (이전과 동일) ---
+// --- 타입 정의 및 데이터 Fetching ---
 interface Notice {
   id: number;
   documentId: string;
@@ -28,37 +28,7 @@ async function getRecentNoticesByCategory(category: '공지' | '자료실', limi
   }
 }
 
-
-// --- HeroSection 컴포넌트 수정 ---
-const HeroSection = () => {
-  const videoUrl = "https://res.cloudinary.com/doyzaetry/video/upload/v1760662732/ehs_rj460p.mp4";
-
-  return (
-    <div>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16 flex flex-col md:flex-row items-center">
-        <div className="w-full md:w-2/3 md:pr-10 mb-8 md:mb-0">
-          <div className="relative h-64 md:h-96 w-full overflow-hidden bg-black">
-            <video
-              src={videoUrl}
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="absolute top-0 left-0 w-full h-full object-cover"
-            >
-              Your browser does not support the video tag.
-            </video>
-          </div>
-        </div>
-        {/* 통계 박스 영역 */}
-        <AnimatedStats />
-      </div>
-    </div>
-  );
-};
-
-
-// --- 나머지 컴포넌트들 (이전과 동일) ---
+// --- 컨설팅 아이템 컴포넌트 ---
 const ConsultingItem = ({ title, description, href, imageUrl }: { title: string; description: string; href: string; imageUrl: string }) => {
   return (
     <a
@@ -81,6 +51,7 @@ const ConsultingItem = ({ title, description, href, imageUrl }: { title: string;
   );
 };
 
+// --- 공지/자료실 블록 컴포넌트 ---
 const ContentBlock = ({ title, children, moreLink }: { title: string; children: React.ReactNode; moreLink: string }) => (
   <div className="border border-gray-300 p-6 shadow-sm">
     <h2 className={`text-xl font-bold border-b-2 border-slate-700/50 pb-2 mb-4 text-slate-700`}>
@@ -92,8 +63,9 @@ const ContentBlock = ({ title, children, moreLink }: { title: string; children: 
 );
 
 
-// --- 메인 페이지 컴포넌트 (변경 없음) ---
+// --- 메인 페이지 컴포넌트 ---
 export default async function EHSPage() {
+  // 8개 컨설팅 서비스 데이터를 여기에 다시 정의합니다.
   const consultingServices = [
     { title: "EHS 컨설팅", desc: "전반적인 EHS 시스템 구축 및 운영 자문", href: "/service/ehs", imageUrl: "https://picsum.photos/id/20/400/300" },
     { title: "근골격계부담작업 유해요인조사", desc: "근골격계 질환 예방을 위한 유해요인 정밀 조사 및 개선", href: "/service/msds", imageUrl: "https://picsum.photos/id/21/400/300" },
@@ -114,9 +86,11 @@ export default async function EHSPage() {
     <div className="font-sans bg-white min-h-screen">
       <Header />
       <main>
+        {/* 수정된 히어로 섹션을 호출합니다. */}
         <HeroSection />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+          {/* 8개 컨설팅 아이템 섹션을 여기에 다시 추가합니다. */}
           <div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
               {consultingServices.map((service, index) => (
