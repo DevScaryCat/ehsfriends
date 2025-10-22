@@ -80,8 +80,6 @@ export const Header = () => {
             <header className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-40">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-end items-center py-2 text-sm text-gray-600 border-b border-gray-100">
-                        <Link href="#" className={`hover:text-slate-700 transition duration-150 ease-in-out px-3`}>로그인</Link>
-                        <Link href="#" className={`hover:text-slate-700 transition duration-150 ease-in-out px-3 border-l border-gray-300`}>사이트맵</Link>
                         <div className="relative ml-4 hidden sm:block" onClick={() => setIsSearchOpen(true)}>
                             <input type="text" placeholder="통합 검색" className="pl-2 pr-8 py-1 border border-gray-300 rounded-sm w-32 text-xs cursor-pointer" readOnly />
                             <Search className="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
