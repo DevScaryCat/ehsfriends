@@ -2,8 +2,7 @@
 import { Header, Footer } from './components/CommonLayout';
 import Link from 'next/link';
 import { HeroSection } from './components/HeroSection';
-// 새로 만든 아이콘 섹션 컴포넌트를 임포트합니다.
-import { IconConsultingSection } from './components/IconConsultingSection';
+import { BusinessInfoSection } from './components/BusinessInfoSection';
 
 // --- 타입 정의 및 데이터 Fetching (이전과 동일) ---
 interface Notice {
@@ -53,10 +52,11 @@ export default async function EHSPage() {
       <main>
         <HeroSection />
 
-        {/* 기존 컨설팅 섹션을 새로운 아이콘 기반 섹션으로 교체합니다. */}
-        <IconConsultingSection />
+        {/* '사업안내' 섹션을 추가합니다. */}
+        <BusinessInfoSection />
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* 공지사항/자료실 섹션의 상단 패딩을 조정합니다. */}
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4"> {/* py-16 대신 py-10 */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <ContentBlock title="공지사항" moreLink="/notice?category=공지">
               <ul className="space-y-2 text-sm text-gray-700">
