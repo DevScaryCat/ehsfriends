@@ -20,6 +20,12 @@ const nextConfig = {
         port: "",
         pathname: "/**", // 모든 경로 허용
       },
+      {
+        protocol: "https",
+        hostname: "picsum.photos",
+        port: "",
+        pathname: "/**", // picsum의 모든 경로 허용
+      },
     ],
   },
 
