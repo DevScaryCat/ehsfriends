@@ -101,8 +101,6 @@ export const BusinessInfoSection = () => {
 
     return (
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 bg-white relative">
-
-
             <div className="flex flex-col md:flex-row gap-8">
                 {/* 좌측 카테고리 메뉴 */}
                 <div className="w-full md:w-1/4">

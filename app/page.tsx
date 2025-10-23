@@ -58,9 +58,7 @@ export default async function EHSPage() {
   ]);
 
   return (
-    // main 태그는 RootLayout의 자식으로 들어가므로 여기서 제거해도 괜찮습니다.
-    // 필요하다면 유지해도 됩니다.
-    <>
+    <div className='bg-white'>
       {/* HeroSection 호출을 다시 추가합니다. */}
       <HeroSection />
       <BusinessInfoSection />
@@ -100,6 +98,6 @@ export default async function EHSPage() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

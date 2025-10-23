@@ -176,7 +176,7 @@ export default function EHSConsultingPage() {
 
     return (
         // Header/Footer 제거, main 태그 사용
-        <main>
+        <main className='bg-white'>
             <PageHero />
             <Breadcrumbs />
 

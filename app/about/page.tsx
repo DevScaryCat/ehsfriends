@@ -100,7 +100,7 @@ export default function AboutPage() {
 
     return (
         // Header/Footer 제거, main 태그 사용
-        <main>
+        <main className='bg-white'>
             <Breadcrumbs />
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
                 {/* 상단 소개 및 CTA */}

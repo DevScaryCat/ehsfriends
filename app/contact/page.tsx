@@ -73,7 +73,7 @@ export default function ContactPage() {
 
     return (
         // Header/Footer 제거, main 태그 사용
-        <main>
+        <main className='bg-white'>
             <Breadcrumbs />
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
                 <section aria-labelledby="contact-title" className="text-center mb-8 border-b border-gray-200 pb-6">
