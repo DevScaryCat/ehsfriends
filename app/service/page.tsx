@@ -1,16 +1,17 @@
 // app/service/page.tsx
 import { ChevronRight, Home, Layout, Zap, Users, Shield, Factory, FlaskConical, Stethoscope } from 'lucide-react';
-import { Header, Footer, PRIMARY_COLOR } from '../components/CommonLayout';
+import { Header, Footer } from '../components/CommonLayout'; // PRIMARY_COLOR는 더 이상 사용되지 않아 제거
 
 // 서비스 목록 (Header의 드롭다운 메뉴와 일치)
 const serviceItems = [
-    { title: "EHS컨설팅", href: "/service/ehs", icon: Layout, color: "blue-500", description: "통합 환경, 보건, 안전 시스템 구축" },
-    { title: "화학물질관리 컨설팅", href: "/service/chemical", icon: FlaskConical, color: "green-500", description: "화평법, 화관법 등 화학물질 규제 대응" },
-    { title: "근골격계 유해요인조사", href: "/service/msds", icon: Stethoscope, color: "red-500", description: "근골격계 질환 예방 및 환경 개선" },
-    { title: "보건관리위탁", href: "/service/health-mgmt", icon: Users, color: "yellow-500", description: "보건 관리 업무 전문 아웃소싱" },
-    { title: "위험성평가", href: "/service/risk-assessment", icon: Zap, color: "indigo-500", description: "사업장 위험 요소를 진단하고 평가" },
-    { title: "작업환경개선 컨설팅", href: "/service/work-env", icon: Factory, color: "teal-500", description: "쾌적하고 안전한 작업 환경 조성" },
-    { title: "산업보건지도사 컨설팅", href: "/service/health-pro", icon: Shield, color: "purple-500", description: "자격 기준에 따른 전문 지도 제공" },
+    // color 속성을 제거하거나, 유지하더라도 icon 색상 적용 시 사용하지 않음
+    { title: "EHS컨설팅", href: "/service/ehs", icon: Layout, description: "통합 환경, 보건, 안전 시스템 구축" },
+    { title: "화학물질관리 컨설팅", href: "/service/chemical", icon: FlaskConical, description: "화평법, 화관법 등 화학물질 규제 대응" },
+    { title: "근골격계 유해요인조사", href: "/service/msds", icon: Stethoscope, description: "근골격계 질환 예방 및 환경 개선" },
+    { title: "보건관리위탁", href: "/service/health-mgmt", icon: Users, description: "보건 관리 업무 전문 아웃소싱" },
+    { title: "위험성평가", href: "/service/risk-assessment", icon: Zap, description: "사업장 위험 요소를 진단하고 평가" },
+    { title: "작업환경개선 컨설팅", href: "/service/work-env", icon: Factory, description: "쾌적하고 안전한 작업 환경 조성" },
+    { title: "산업보건지도사 컨설팅", href: "/service/health-pro", icon: Shield, description: "자격 기준에 따른 전문 지도 제공" },
 ];
 
 
@@ -32,13 +33,14 @@ const Breadcrumbs = () => {
 /**
  * @component ServiceTile: HSS Vendor Management 스타일의 서비스 타일
  */
-const ServiceTile = ({ title, href, icon: Icon, color, description }: typeof serviceItems[0] & { icon: React.ElementType }) => (
+const ServiceTile = ({ title, href, icon: Icon, description }: typeof serviceItems[0] & { icon: React.ElementType }) => (
     <a
         href={href}
         className="block p-4 border border-gray-300 shadow-sm hover:shadow-lg transition duration-200 ease-in-out bg-white text-center space-y-3"
     >
         <div className="flex justify-center items-center">
-            <Icon className={`h-8 w-8 text-${color}`} />
+            {/* 아이콘 색상을 text-slate-700으로 통일하고, 크기를 키워 진하게 보이도록 조정 */}
+            <Icon className={`h-10 w-10 text-slate-700`} />
         </div>
         <h3 className={`text-lg font-bold text-slate-700`}>{title}</h3>
         <p className="text-sm text-gray-600">{description}</p>
